@@ -9,7 +9,8 @@ import {
   CalendarFold,
   Cake,
   Syringe,
-  BellRing 
+  BellRing,
+  Database
 } from 'lucide-react';
 
 export const menus = [
@@ -68,5 +69,11 @@ export const menus = [
     link: '/reminder',
     name: 'Pengingat KB',
     icon: BellRing,
+  },
+  {
+    link: '/master-data',
+    name: 'Master Data',
+    icon: Database,
+    adminOnly: true, // Custom property to indicate admin-only menu item
   },
 ];

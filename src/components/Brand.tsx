@@ -1,7 +1,7 @@
 import { Hospital } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { app } from '@/data/app';
+import { APP } from '@/data/app';
 
 interface BrandProps {
   className?: string;
@@ -14,7 +14,7 @@ export const Brand: React.FC<BrandProps> = ({ className }) => {
     >
       <Link to="/" className="flex items-center gap-2 font-semibold">
         <Hospital className="h-6 w-6" />
-        <span className="font-bold uppercase text-sm lg:text-xl">{app.name}</span>
+        <span className="font-bold uppercase text-sm lg:text-xl">{APP.NAME}</span>
       </Link>
     </div>
   );

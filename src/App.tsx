@@ -1,52 +1,36 @@
 import Login from './pages/Login';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ModeToggle } from '@/components/mode-toggle';
-import { useState } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { SideNav } from '@/components/SideNav';
 import { TopBar } from '@/components/TopBar';
-import { app } from './data/app';
+import { APP } from './data/app';
 import { Dashboard } from '@/components/contents/Dashboard';
-import { Admin } from './pages/Admin';
+import { RootState } from './store/store';
+import { useSelector } from 'react-redux';
+
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
-  if (!isLogin) {
+  if (!isLoggedIn) {
     return (
-      <ThemeProvider defaultTheme="dark" storageKey={`${app.name}-theme`}>
+      <ThemeProvider defaultTheme="dark" storageKey={`${APP.NAME}-theme`}>
         <div className="absolute">
           <ModeToggle />
         </div>
-        <Login
-          handleLogin={setIsLogin}
-          background={app.backgroundImage}
-          setAdmin={setIsAdmin}
-        />
+        <Login background={APP.BG} />
       </ThemeProvider>
     );
   }
-  if (isLogin && isAdmin) {
-    return (
-      <ThemeProvider defaultTheme="dark" storageKey={`${app.name}-theme`}>
-        <div className="absolute">
-          <ModeToggle />
-        </div>
-        <Admin />
-      </ThemeProvider>
-    );
-  }
-
-  
 
   return (
-    <ThemeProvider defaultTheme="dark" storageKey={`${app.name}-theme`}>
+    <ThemeProvider defaultTheme="dark" storageKey={`${APP.NAME}-theme`}>
       <BrowserRouter>
         {/* Layout */}
         <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
           <SideNav />
           <div className="flex flex-col">
-            <TopBar handleLogout={setIsLogin}/>
+            <TopBar />
 
             {/* Main Content */}
 
@@ -54,7 +38,6 @@ function App() {
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                {/* <Route path="/orders" element={<Orders />} /> */}
               </Routes>
             </main>
           </div>

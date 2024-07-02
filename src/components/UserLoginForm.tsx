@@ -9,11 +9,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
-// import React from 'react';
+import React from 'react';
 import axios from 'axios';
 import { APP } from '@/data/app';
 import { setAuthenticateHeader } from '@/utils/authenticate';
@@ -28,11 +27,11 @@ const schema = z.object({
 
 type FormFields = z.infer<typeof schema>;
 
-// export type LoginFormProps = {
-//   setIsAdminLogin: React.Dispatch<React.SetStateAction<boolean>>;
-// };
+type LoginFormProps = {
+  setIsRegister: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-export const UserLoginForm = () => {
+export const UserLoginForm = ({setIsRegister}: LoginFormProps) => {
   const dispatch = useDispatch();
   const form = useForm<FormFields>({
     resolver: zodResolver(schema),
@@ -98,6 +97,7 @@ export const UserLoginForm = () => {
                   <FormControl>
                     <Input
                       placeholder="password"
+                      type='password'
                       {...field}
                       value={field.value ?? ''}
                     />
@@ -129,7 +129,7 @@ export const UserLoginForm = () => {
           </Button>
         </form>
         <div className="mt-4 text-center text-sm">
-          Don&apos;t have an account? <Button variant="link">Sign up</Button>
+          Don&apos;t have an account? <Button onClick={()=>setIsRegister(true)} variant="link">Sign up</Button>
         </div>
       </Form>
     </>

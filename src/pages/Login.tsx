@@ -1,13 +1,15 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { APP } from '@/data/app';
-// import { AdminLoginForm } from '@/components/AdminLoginForm';
 import { UserLoginForm } from '@/components/UserLoginForm';
+import { RegisterForm } from '@/components/RegisterForm';
 
 type LoginProps = {
   background: string;
 };
 
 export default function Login({ background }: LoginProps) {
+  const [isRegister, setIsRegister] = useState(false);
+
   return (
     <>
       <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2">
@@ -18,13 +20,15 @@ export default function Login({ background }: LoginProps) {
                 {APP.NAME}
               </h1>
             </div>
-            <UserLoginForm />
-            
+            {!isRegister ? (
+              <UserLoginForm setIsRegister={setIsRegister} />
+            ) : (
+              <RegisterForm setIsRegister={setIsRegister} />
+            )}
           </div>
         </div>
 
         <div className="hidden bg-muted lg:block">
-          {/* Image */}
           <img
             src={background}
             alt="background image"

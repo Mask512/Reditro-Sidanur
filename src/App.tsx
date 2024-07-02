@@ -8,6 +8,7 @@ import { APP } from './data/app';
 import { Dashboard } from '@/components/contents/Dashboard';
 import { RootState } from './store/store';
 import { useSelector } from 'react-redux';
+import { Master } from './components/contents/Master/Master';
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -38,6 +39,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/master-data/*" element={<Master />} />
               </Routes>
             </main>
           </div>

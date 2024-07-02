@@ -1,11 +1,8 @@
 import { Brand } from './Brand';
 import { Menu } from 'lucide-react';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-
 import { Link, useLocation } from 'react-router-dom';
 import { menus } from '@/data/menu';
 
@@ -13,7 +10,7 @@ export const SideNavDrawer = () => {
   const location = useLocation();
 
   const isActive = (path: string) => {
-    return location.pathname === path;
+    return location.pathname === path || location.pathname.startsWith(path);
   };
   return (
     <Sheet>

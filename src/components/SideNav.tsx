@@ -7,11 +7,10 @@ import { adminLogin, RootState } from '@/store/store';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { APP } from '@/data/app';
-
-type Role = 'ROLE_USER' | 'ROLE_ADMIN';
+import { authority } from './contents/Master/UserManagement';
 
 interface AccountResponse {
-  authorities: Role[];
+  authorities: authority[];
 }
 
 export const SideNav = () => {
@@ -20,7 +19,7 @@ export const SideNav = () => {
   const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
 
   const isActive = (path: string) => {
-    return location.pathname === path;
+    return location.pathname === path || location.pathname.startsWith(path);
   };
 
   useEffect(() => {

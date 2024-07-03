@@ -1,16 +1,9 @@
 import { DataTable } from '@/components/ui/data-table';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
 import { APP } from '@/data/app';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { userColumns } from './userColumns';
+import { BreadCrumb } from '@/components/BreadCrumb';
 
 export type authority = 'ROLE_USER' | 'ROLE_ADMIN';
 
@@ -62,17 +55,7 @@ export const UserManagement = () => {
 
   return (
     <>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/master-data">Master Data</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>User Management</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <BreadCrumb pageName='User Management'/>
       <h1 className="text-xl font-semibold">User Management</h1>
       <DataTable
         columns={userColumns(handleDelete, handleUpdate, toggleActive)}

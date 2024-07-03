@@ -1,13 +1,13 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
-import { PendidikanType } from './Pendidikan';
+import { JenisKBType } from './JenisKB';
 
-export const pendidikanColumns = (
+export const jenisKBColumns = (
   handleDelete: (id: string) => void,
-): ColumnDef<PendidikanType>[] => [
+): ColumnDef<JenisKBType>[] => [
   {
     accessorKey: 'nama',
-    header: 'Pendidikan',
+    header: 'Jenis KB',
   },
   {
     id: 'action',

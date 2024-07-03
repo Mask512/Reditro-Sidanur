@@ -26,7 +26,7 @@ const menus = [
   },
   {
     link: 'hubungan',
-    name: 'Hubungan',
+    name: 'Penanggung Jawab',
   },
   {
     link: 'pekerjaan',

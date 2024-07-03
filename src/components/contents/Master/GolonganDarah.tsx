@@ -12,12 +12,14 @@ export type BloodTypes = {
   nama: string;
 };
 
+const endpoint = 'golongan-darahs';
+
 export const GolonganDarah = () => {
   const [dataDarah, setDataDarah] = useState<BloodTypes[]>([]);
   const [golonganDarah, setGolonganDarah] = useState('');
 
   const fetchData = async () => {
-    const { data } = await axios.get(`${APP.API_URL}/golongan-darahs`);
+    const { data } = await axios.get(`${APP.API_URL}/${endpoint}`);
     if (data) {
       setDataDarah(data);
     }
@@ -28,13 +30,13 @@ export const GolonganDarah = () => {
   }, [setDataDarah]);
 
   const handleDelete = async (id: string) => {
-    await axios.delete(`${APP.API_URL}/golongan-darahs/${id}`);
+    await axios.delete(`${APP.API_URL}/${endpoint}/${id}`);
     fetchData();
   };
 
   const handleUpdate = async () => {
     if (golonganDarah.trim()) {
-      await axios.post(`${APP.API_URL}/golongan-darahs`, {
+      await axios.post(`${APP.API_URL}/${endpoint}`, {
         nama: golonganDarah,
       });
       setGolonganDarah('');
@@ -46,7 +48,7 @@ export const GolonganDarah = () => {
     <>
       <BreadCrumb pageName="Golongan Darah" />
       <h1 className="text-xl font-semibold">Golongan Darah</h1>
-      
+
       <div className="max-w-lg">
         <div className="flex gap-4 mb-4">
           <Input

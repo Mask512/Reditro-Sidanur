@@ -6,6 +6,7 @@ import { userColumns } from './userColumns';
 import { BreadCrumb } from '@/components/BreadCrumb';
 
 export type authority = 'ROLE_USER' | 'ROLE_ADMIN';
+const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export type User = {
   id: string;
@@ -55,7 +56,7 @@ export const UserManagement = () => {
 
   return (
     <>
-      <BreadCrumb pageName='User Management'/>
+      <BreadCrumb pageName='User Management' parentLinks={parentLinks}/>
       <h1 className="text-xl font-semibold">User Management</h1>
       <DataTable
         columns={userColumns(handleDelete, handleUpdate, toggleActive)}

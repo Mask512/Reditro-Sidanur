@@ -6,25 +6,29 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import React from 'react';
 
-type BreadCrumbProps = {
-  pageName: string
+interface BreadCrumbProps {
+  pageName: string;
+  parentLinks: { href: string; label: string }[];
 }
 
-export const BreadCrumb = ({ pageName }: BreadCrumbProps) => {
+export const BreadCrumb = ({ pageName, parentLinks }: BreadCrumbProps) => {
   return (
-    <>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/master-data">Master Data</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{pageName}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-    </>
+    <Breadcrumb>
+      <BreadcrumbList>
+        {parentLinks.map((link, index) => (
+          <React.Fragment key={index}>
+            <BreadcrumbItem>
+              <BreadcrumbLink href={link.href}>{link.label}</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+          </React.Fragment>
+        ))}
+        <BreadcrumbItem>
+          <BreadcrumbPage>{pageName}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
   );
 };

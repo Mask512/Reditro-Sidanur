@@ -2,50 +2,45 @@ import { BreadCrumb } from '@/components/BreadCrumb';
 import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
 import { Input } from '@/components/ui/input';
-import { APP } from '@/data/app';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { pekerjaanColumns } from './pekerjaanColumns';
+import { addPekerjaan, deletePekerjaan, getPekerjaans } from '@/utils/api';
 
 export type PekerjaanType = {
   id: string;
   nama: string;
 };
-const endpoint = 'pekerjaans';
+const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export const Pekerjaan = () => {
   const [dataPekerjaan, setDataPekerjaan] = useState<PekerjaanType[]>([]);
   const [pekerjaan, setPekerjaan] = useState('');
 
   const fetchData = async () => {
-    const { data } = await axios.get(`${APP.API_URL}/${endpoint}`);
-    if (data) {
-      setDataPekerjaan(data);
-    }
+    const data = await getPekerjaans();
+    setDataPekerjaan(data);
   };
 
   useEffect(() => {
     fetchData();
   }, [setDataPekerjaan]);
 
-  const handleAdd = async ()=> {
+  const handleAdd = async () => {
     if (pekerjaan.trim()) {
-      await axios.post(`${APP.API_URL}/${endpoint}`, {
-        nama: pekerjaan,
-      });
+      await addPekerjaan(pekerjaan);
       setPekerjaan('');
       fetchData();
     }
-  }
+  };
 
   const handleDelete = async (id: string) => {
-    await axios.delete(`${APP.API_URL}/${endpoint}/${id}`);
+    await deletePekerjaan(id);
     fetchData();
   };
 
   return (
     <>
-      <BreadCrumb pageName="Pekerjaan" />
+      <BreadCrumb pageName="Pekerjaan" parentLinks={parentLinks} />
       <h1 className="text-xl font-semibold">Pekerjaan</h1>
       <div className="max-w-lg">
         <div className="flex gap-4 mb-4">

@@ -1,28 +1,29 @@
 import { BreadCrumb } from '@/components/BreadCrumb';
 import { DataTable } from '@/components/ui/data-table';
-import { APP } from '@/data/app';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { golonganDarahColumns } from './golonganDarahColumns';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import {
+  addGolonganDarah,
+  deleteGolonganDarah,
+  getGolonganDarahs,
+} from '@/utils/api';
 
 export type BloodTypes = {
   id: string;
   nama: string;
 };
 
-const endpoint = 'golongan-darahs';
+const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export const GolonganDarah = () => {
   const [dataDarah, setDataDarah] = useState<BloodTypes[]>([]);
   const [golonganDarah, setGolonganDarah] = useState('');
 
   const fetchData = async () => {
-    const { data } = await axios.get(`${APP.API_URL}/${endpoint}`);
-    if (data) {
-      setDataDarah(data);
-    }
+    const data = await getGolonganDarahs();
+    setDataDarah(data);
   };
 
   useEffect(() => {
@@ -30,15 +31,13 @@ export const GolonganDarah = () => {
   }, [setDataDarah]);
 
   const handleDelete = async (id: string) => {
-    await axios.delete(`${APP.API_URL}/${endpoint}/${id}`);
+    await deleteGolonganDarah(id);
     fetchData();
   };
 
   const handleUpdate = async () => {
     if (golonganDarah.trim()) {
-      await axios.post(`${APP.API_URL}/${endpoint}`, {
-        nama: golonganDarah,
-      });
+      await addGolonganDarah(golonganDarah);
       setGolonganDarah('');
       fetchData();
     }
@@ -46,7 +45,7 @@ export const GolonganDarah = () => {
 
   return (
     <>
-      <BreadCrumb pageName="Golongan Darah" />
+      <BreadCrumb pageName="Golongan Darah" parentLinks={parentLinks} />
       <h1 className="text-xl font-semibold">Golongan Darah</h1>
 
       <div className="max-w-lg">

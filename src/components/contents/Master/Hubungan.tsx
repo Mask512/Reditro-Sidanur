@@ -2,27 +2,24 @@ import { BreadCrumb } from '@/components/BreadCrumb';
 import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
 import { Input } from '@/components/ui/input';
-import { APP } from '@/data/app';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { hubunganColumns } from './hubunganColumns';
+import { addHubungan, deleteHubungan, getHubungans } from '@/utils/api';
 
 export type HubunganType = {
   id: string;
   nama: string;
 };
 
-const endpoint = 'hubungan-penanggung-jawabs';
+const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export const Hubungan = () => {
   const [dataHubungan, setDataHubungan] = useState<HubunganType[]>([]);
   const [hubungan, setHubungan] = useState('');
 
   const fetchData = async () => {
-    const { data } = await axios.get(`${APP.API_URL}/${endpoint}`);
-    if (data) {
-      setDataHubungan(data);
-    }
+    const data = await getHubungans();
+    setDataHubungan(data);
   };
 
   useEffect(() => {
@@ -31,22 +28,23 @@ export const Hubungan = () => {
 
   const handleAdd = async () => {
     if (hubungan.trim()) {
-      await axios.post(`${APP.API_URL}/${endpoint}`, {
-        nama: hubungan,
-      });
+      await addHubungan(hubungan);
       setHubungan('');
       fetchData();
     }
   };
 
   const handleDelete = async (id: string) => {
-    await axios.delete(`${APP.API_URL}/${endpoint}/${id}`);
+    await deleteHubungan(id);
     fetchData();
   };
 
   return (
     <>
-      <BreadCrumb pageName="Hubungan Penanggung Jawab" />
+      <BreadCrumb
+        pageName="Hubungan Penanggung Jawab"
+        parentLinks={parentLinks}
+      />
       <h1 className="text-xl font-semibold">Hubungan Penanggung Jawab</h1>
 
       <div className="max-w-lg">

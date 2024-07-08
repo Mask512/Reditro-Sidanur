@@ -30,6 +30,7 @@ export type DataBidanType = {
 };
 
 const endpoint = 'bidans';
+const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export const DataBidan = () => {
   const { toast } = useToast();
@@ -65,14 +66,13 @@ export const DataBidan = () => {
     fetchData();
   };
 
-
   useEffect(() => {
     fetchData();
   }, [setDataBidan]);
 
   return (
     <>
-      <BreadCrumb pageName="Data Bidan" />
+      <BreadCrumb pageName="Data Bidan" parentLinks={parentLinks} />
       <h1 className="text-xl font-semibold">Data Bidan</h1>
       <div className="grid gap-4 grid-cols-1">
         <Dialog>
@@ -86,7 +86,7 @@ export const DataBidan = () => {
                 Isi data bidan dengan lengkap.
               </DialogDescription>
             </DialogHeader>
-            <DataBidanForm onSubmitSuccess={handleSubmitSuccess}/>
+            <DataBidanForm onSubmitSuccess={handleSubmitSuccess} />
           </DialogContent>
         </Dialog>
         <DataTable columns={dataBidanColumns(deleteBidan)} data={dataBidan} />

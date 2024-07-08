@@ -9,6 +9,7 @@ import { jenisImunisasiColumns } from './jenisImunisasiColumns';
 
 
 const endpoint = 'jenis-imunisasis';
+const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export type JenisImunisasiType = {
   id: string;
@@ -47,7 +48,7 @@ export const JenisImunisasi = () => {
 
   return (
     <>
-    <BreadCrumb pageName="Jenis Imunisasi" />
+    <BreadCrumb pageName="Jenis Imunisasi" parentLinks={parentLinks}/>
     <div className="max-w-lg">
         <div className="flex gap-4 mb-4">
           <Input

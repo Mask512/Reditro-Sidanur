@@ -36,7 +36,7 @@ export const menus = [
     icon: HeartPulse,
   },
   {
-    link: '/checkup',
+    link: '/kehamilan',
     name: 'Kehamilan',
     icon: BookHeart,
   },
@@ -61,12 +61,12 @@ export const menus = [
     icon: Syringe,
   },
   {
-    link: '/records',
+    link: '/riwayat',
     name: 'Riwayat',
     icon: FolderClock,
   },
   {
-    link: '/reminder',
+    link: '/reminder-kb',
     name: 'Pengingat KB',
     icon: BellRing,
   },

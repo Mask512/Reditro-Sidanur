@@ -4,10 +4,10 @@ const parentLinks = [
   { href: '/', label: 'Home' },
 ];
 
-export const Dashboard = () => {
+export const Riwayat = () => {
   return (
     <>
-    <BreadCrumb pageName='Dashboard' parentLinks={parentLinks}/>
+    <BreadCrumb pageName='Riwayat Medis' parentLinks={parentLinks}/>
     </>
   );
 };

@@ -9,6 +9,16 @@ import { Dashboard } from '@/components/contents/Dashboard';
 import { RootState } from './store/store';
 import { useSelector } from 'react-redux';
 import { Master } from './components/contents/Master/Master';
+import { Register } from './components/contents/Register';
+import { Appointment } from './components/contents/Appointment';
+import { Anamnesis } from './components/contents/Anamnesis';
+import { Kehamilan } from './components/contents/Kehamilan';
+import { Nifas } from './components/contents/Nifas';
+import { KB } from './components/contents/KB';
+import { Imunisasi } from './components/contents/Imunisasi';
+import { Riwayat } from './components/contents/Riwayat';
+import { Persalinan } from './components/contents/Persalinan';
+import { ReminderKB } from './components/contents/ReminderKB';
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -39,6 +49,16 @@ function App() {
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/appointment" element={<Appointment />} />
+                <Route path="/anamnesis" element={<Anamnesis />} />
+                <Route path="/kehamilan" element={<Kehamilan />} />
+                <Route path="/persalinan" element={<Persalinan />} />
+                <Route path="/nifas" element={<Nifas />} />
+                <Route path="/kb" element={<KB />} />
+                <Route path="/imunisasi" element={<Imunisasi />} />
+                <Route path="/riwayat" element={<Riwayat />} />
+                <Route path="/reminder-kb" element={<ReminderKB />} />
                 <Route path="/master-data/*" element={<Master />} />
               </Routes>
             </main>

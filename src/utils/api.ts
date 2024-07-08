@@ -1,3 +1,4 @@
+import { PatientType } from '@/components/contents/Register';
 import { APP } from '@/data/app';
 import axios from 'axios';
 
@@ -73,7 +74,10 @@ export const getDataPraktek = async () => {
   return data as DataPraktekType[];
 };
 
-export const updateDataPraktek = async (id: string, newData: DataPraktekType) => {
+export const updateDataPraktek = async (
+  id: string,
+  newData: DataPraktekType,
+) => {
   await axios.put(`${APP.API_URL}/lokasi-prakteks/${id}`, newData);
 };
 
@@ -95,4 +99,16 @@ export const addJenisKB = async (nama: string) => {
 
 export const deleteJenisKB = async (id: string) => {
   await axios.delete(`${APP.API_URL}/jenis-kbs/${id}`);
+};
+
+export const getTotalPatients = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/pasiens/count`);
+  if (data) {
+    return data;
+  }
+};
+
+export const addPatient = async (values: PatientType) => {
+  const response = await axios.post(`${APP.API_URL}/pasiens`, values);  
+  return response;
 };

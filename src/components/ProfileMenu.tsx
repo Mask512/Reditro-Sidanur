@@ -20,8 +20,8 @@ export const ProfileMenu = () => {
     clearAuth();
     navigate('/');
   };
-  const [username, setUsername] = useState('John Doe');
-  const [name, setName] = useState('John Doe');
+  const [username, setUsername] = useState('Login First');
+  const [name, setName] = useState('Login First');
 
   useEffect(() => {
     const fetchAccount = async () => {

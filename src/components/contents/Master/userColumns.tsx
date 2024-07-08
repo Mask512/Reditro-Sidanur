@@ -1,19 +1,9 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
 import { authority, User } from './UserManagement';
+import { ConfirmAlert } from '@/components/ConfirmAlert';
 
 export const userColumns = (
   handleDelete: (login: string) => void,
@@ -97,26 +87,16 @@ export const userColumns = (
       return (
         <div className="flex flex-row gap-2">
           <Button variant="outline" disabled>Edit</Button>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant="destructive">Delete</Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  this account and remove this data from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={() => handleDelete(user.login)}>
-                  Delete
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <ConfirmAlert
+          messages={{
+            title: 'Hapus User ?',
+            description: `${row.original.firstName} ${row.original.lastName} akan dihapus secara permanen .`,
+          }}
+          buttonVariant="destructive"
+          action={() => handleDelete(user.login)}
+          actionName="Hapus"
+          icon={<Trash className="mr-2 h-4 w-4" />}
+        />
         </div>
       );
     },

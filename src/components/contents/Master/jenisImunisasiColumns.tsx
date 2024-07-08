@@ -1,14 +1,14 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { JenisKBType } from './JenisKB';
+import { JenisImunisasiType } from './JenisImunisasi';
 import { ConfirmAlert } from '@/components/ConfirmAlert';
 import { Trash } from 'lucide-react';
 
-export const jenisKBColumns = (
+export const jenisImunisasiColumns = (
   handleDelete: (id: string) => void,
-): ColumnDef<JenisKBType>[] => [
+): ColumnDef<JenisImunisasiType>[] => [
   {
     accessorKey: 'nama',
-    header: 'Jenis KB',
+    header: 'Jenis Imunisasi',
   },
   {
     id: 'action',
@@ -17,7 +17,7 @@ export const jenisKBColumns = (
       return (
         <ConfirmAlert
           messages={{
-            title: 'Hapus Jenis KB ?',
+            title: 'Hapus Jenis Imunisasi ?',
             description: `${row.original.nama} akan dihapus secara permanen .`,
           }}
           buttonVariant="destructive"

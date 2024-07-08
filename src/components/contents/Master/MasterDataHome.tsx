@@ -37,6 +37,10 @@ const menus = [
     name: 'Jenis KB',
   },
   {
+    link: 'jenis-imunisasi',
+    name: 'Jenis Imunisasi',
+  },
+  {
     link: 'bidan',
     name: 'Data Bidan',
   },

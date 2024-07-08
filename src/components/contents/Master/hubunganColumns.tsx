@@ -1,6 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { Button } from '@/components/ui/button';
 import { HubunganType } from './Hubungan';
+import { ConfirmAlert } from '@/components/ConfirmAlert';
+import { Trash } from 'lucide-react';
 
 export const hubunganColumns = (
   handleDelete: (id: string) => void,
@@ -14,12 +15,16 @@ export const hubunganColumns = (
     header: 'Action',
     cell: ({ row }) => {
       return (
-        <Button
-          variant="destructive"
-          onClick={() => handleDelete(row.original.id)}
-        >
-          Delete
-        </Button>
+        <ConfirmAlert
+          messages={{
+            title: 'Hapus Hubungan Penanggung Jawab ?',
+            description: `${row.original.nama} akan dihapus secara permanen .`,
+          }}
+          buttonVariant="destructive"
+          action={() => handleDelete(row.original.id)}
+          actionName="Hapus"
+          icon={<Trash className="mr-2 h-4 w-4" />}
+        />
       );
     },
   },

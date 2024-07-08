@@ -8,6 +8,7 @@ import { Hubungan } from './Hubungan';
 import { Pekerjaan } from './Pekerjaan';
 import { JenisKB } from './JenisKB';
 import { DataBidan } from './DataBidan';
+import { JenisImunisasi } from './JenisImunisasi';
 
 export const Master = () => {
   return (
@@ -20,6 +21,7 @@ export const Master = () => {
       <Route path="hubungan" element={<Hubungan />} />
       <Route path="pekerjaan" element={<Pekerjaan />} />
       <Route path="jenis-kb" element={<JenisKB />} />
+      <Route path="jenis-imunisasi" element={<JenisImunisasi />} />
       <Route path="bidan" element={<DataBidan />} />
     </Routes>
   );

@@ -19,17 +19,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useEffect, useState } from 'react';
-// import { getLastRMNum } from '@/utils/getRMNumber';
+import { getLastRMNum } from '@/utils/getRMNumber';
 import {
   addPatient,
   getGolonganDarahs,
   getHubungans,
   getPekerjaans,
   getPendidikans,
-  // getTotalPatients,
+  getTotalPatients,
 } from '@/utils/api';
 import { toast } from '@/components/ui/use-toast';
 
@@ -66,11 +67,12 @@ const hubunganScheme = z.object({
 });
 
 const formSchema = z.object({
-  // id: z.string().min(1, 'Required'),
+  nomorPasien: z.string().min(1, 'Required'),
   nik: z.string().min(1, 'Required'),
   nama: z.string().min(1, 'Required'),
   tempatLahir: z.string().min(1, 'Required'),
   tanggalLahir: z.string().date(),
+  alamat: z.string().min(1, 'Required'),
   jenisKelamin: z.enum(['PRIA', 'WANITA']),
   noTelp: z.string().min(1, 'Required'),
   noTelpDarurat: z.string(),
@@ -83,7 +85,7 @@ const formSchema = z.object({
 
 export type PatientType = z.infer<typeof formSchema>;
 
-export const Register = () => {  
+export const Register = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -91,30 +93,31 @@ export const Register = () => {
       nama: '',
       tempatLahir: '',
       tanggalLahir: '',
+      alamat: '',
       noTelp: '',
       noTelpDarurat: '',
       namaPenanggungJawab: '',
-      jenisKelamin: 'WANITA'
+      jenisKelamin: 'WANITA',
     },
   });
 
-  // const [lastRMNumber, setLastRMNumber] = useState('');
+  const [lastRMNumber, setLastRMNumber] = useState('');
   const [golonganDarah, setGolonganDarah] = useState<BloodTypes[]>([]);
   const [pendidikan, setPendidikan] = useState<PendidikanType[]>([]);
   const [pekerjaan, setPekerjaan] = useState<PekerjaanType[]>([]);
   const [hubungan, setHubungan] = useState<HubunganType[]>([]);
 
-  // useEffect(() => {
-  //   const lastRM = async () => {
-  //     const data = await getTotalPatients();
-  //     if (data) {
-  //       const rmNumber = getLastRMNum(data);
-  //       setLastRMNumber(rmNumber);
-  //       form.setValue('id', rmNumber);
-  //     }
-  //   };
-  //   lastRM();
-  // }, [form]);
+  useEffect(() => {
+    const lastRM = async () => {
+      const data = await getTotalPatients();
+      if (data) {
+        const rmNumber = getLastRMNum(data);
+        setLastRMNumber(rmNumber);
+        form.setValue('nomorPasien', rmNumber);
+      }
+    };
+    lastRM();
+  }, [form]);
 
   useEffect(() => {
     const fetchGolDarah = async () => {
@@ -170,27 +173,23 @@ export const Register = () => {
         title: 'Sukses!',
         description: 'Pasien berhasil ditambahkan',
       });
-
     }
   };
 
   return (
     <>
       <BreadCrumb pageName="Registration" parentLinks={parentLinks} />
-      {/* Registration form */}
-
       <h3 className="text-2xl font-bold">Pendaftaran Pasien Baru</h3>
       <Separator />
-
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-4 max-w-4xl"
         >
           <div className="grid grid-cols-2 gap-4">
-            {/* <FormField
+            <FormField
               control={form.control}
-              name="id"
+              name="nomorPasien"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>NO RM</FormLabel>
@@ -204,7 +203,7 @@ export const Register = () => {
                   <FormMessage />
                 </FormItem>
               )}
-            /> */}
+            />
             <FormField
               control={form.control}
               name="nik"
@@ -266,6 +265,23 @@ export const Register = () => {
               />
             </div>
           </div>
+          <FormField
+            control={form.control}
+            name="alamat"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Alamat</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Alamat  . . ."
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-4">
               <FormField
@@ -360,7 +376,7 @@ export const Register = () => {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Pendidikan Darah" />
+                          <SelectValue placeholder="Pendidikan Terakhir" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>

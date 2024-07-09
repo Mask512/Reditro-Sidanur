@@ -1,9 +1,9 @@
 import {
   Home,
   LineChart,
-  BookUser,
+  // BookUser,
   UserPlus,
-  HeartPulse,
+  // HeartPulse,
   FolderClock,
   BookHeart,
   CalendarFold,
@@ -23,18 +23,18 @@ export const menus = [
     link: '/register',
     name: 'Registrasi Pasien',
     icon: UserPlus,
-    badge: 6, // Assuming only orders have a badge
+    // badge: 6, // Assuming only orders have a badge
   },
-  {
-    link: '/appointment',
-    name: 'Pendaftaran',
-    icon: BookUser,
-  },
-  {
-    link: '/anamnesis',
-    name: 'Anamnesis',
-    icon: HeartPulse,
-  },
+  // {
+  //   link: '/appointment',
+  //   name: 'Pendaftaran',
+  //   icon: BookUser,
+  // },
+  // {
+  //   link: '/anamnesis',
+  //   name: 'Anamnesis',
+  //   icon: HeartPulse,
+  // },
   {
     link: '/kehamilan',
     name: 'Kehamilan',

@@ -5,13 +5,7 @@ import { menus } from '@/data/menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminLogin, RootState } from '@/store/store';
 import { useEffect } from 'react';
-import axios from 'axios';
-import { APP } from '@/data/app';
-import { authority } from './contents/Master/UserManagement';
-
-interface AccountResponse {
-  authorities: authority[];
-}
+import { getAccount } from '@/utils/api';
 
 export const SideNav = () => {
   const location = useLocation();
@@ -25,10 +19,8 @@ export const SideNav = () => {
   useEffect(() => {
     const fetchAuthorities = async () => {
       try {
-        const response = await axios.get<AccountResponse>(
-          `${APP.API_URL}/account`,
-        );
-        const roles = response.data.authorities;
+        const data = await getAccount();
+        const roles = data.authorities;
         const isAdmin = roles.find((role) => role === 'ROLE_ADMIN');
         if (isAdmin) {
           dispatch(adminLogin());

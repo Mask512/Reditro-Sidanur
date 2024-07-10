@@ -2,6 +2,47 @@ import { PatientType } from '@/components/contents/Register';
 import { APP } from '@/data/app';
 import axios from 'axios';
 
+export type authority = 'ROLE_USER' | 'ROLE_ADMIN';
+
+type AccountResponse = {
+  authorities: authority[];
+}
+
+export const getAccount = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/account`);
+  return data as AccountResponse;
+};
+
+export type UserType = {
+  id: string;
+  login: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  imageUrl: string;
+  activated: boolean;
+  langKey: string;
+  createdBy: string;
+  createdDate: string;
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  authorities: authority[];
+};
+
+export const getUsers = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/admin/users`);
+  return data ;
+};
+
+export const deleteUser = async (login: string) => {
+  await axios.delete(`${APP.API_URL}/admin/users/${login}`);
+};
+
+export const toggleActiveUser = async (user: UserType) => {
+  user.activated = !user.activated;
+  await axios.put(`${APP.API_URL}/admin/users`, user);
+};
+
 export const getPekerjaans = async () => {
   const { data } = await axios.get(`${APP.API_URL}/pekerjaans`);
   return data;
@@ -49,6 +90,11 @@ export const deleteHubungan = async (id: string) => {
 
 export const getGolonganDarahs = async () => {
   const { data } = await axios.get(`${APP.API_URL}/golongan-darahs`);
+  return data;
+};
+
+export const getGolonganDarahById = async (id: string) => {
+  const { data } = await axios.get(`${APP.API_URL}/golongan-darahs/${id}`);
   return data;
 };
 
@@ -103,6 +149,20 @@ export const deleteJenisKB = async (id: string) => {
 
 export const getTotalPatients = async () => {
   const { data } = await axios.get(`${APP.API_URL}/pasiens/count`);
+  if (data) {
+    return data;
+  }
+};
+
+export const getPatients = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/pasiens`);
+  if (data) {
+    return data;
+  }
+};
+
+export const getPatientById = async (id:string) => {
+  const { data } = await axios.get(`${APP.API_URL}/pasiens/${id}`);
   if (data) {
     return data;
   }

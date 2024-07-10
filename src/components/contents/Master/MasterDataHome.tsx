@@ -5,46 +5,8 @@ import {
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
+import { masterMenus } from '@/data/menu';
 import { Link } from 'react-router-dom';
-
-const menus = [
-  {
-    link: 'data-praktek',
-    name: 'Data Praktek',
-  },
-  {
-    link: 'user-management',
-    name: 'User Management',
-  },
-  {
-    link: 'golongan-darah',
-    name: 'Golongan Darah',
-  },
-  {
-    link: 'pendidikan',
-    name: 'Pendidikan',
-  },
-  {
-    link: 'hubungan',
-    name: 'Penanggung Jawab',
-  },
-  {
-    link: 'pekerjaan',
-    name: 'Pekerjaan',
-  },
-  {
-    link: 'jenis-kb',
-    name: 'Jenis KB',
-  },
-  {
-    link: 'jenis-imunisasi',
-    name: 'Jenis Imunisasi',
-  },
-  {
-    link: 'bidan',
-    name: 'Data Bidan',
-  },
-];
 
 export const MasterDataHome = () => (
   <>
@@ -57,7 +19,7 @@ export const MasterDataHome = () => (
     </Breadcrumb>
 
     <div className="grid grid-cols-3 gap-4 max-w-xl">
-      {menus.map((menu) => {
+      {masterMenus.map((menu) => {
         return (
           <Link key={menu.link} to={`/master-data/${menu.link}`}>
             <Button variant="outline" className="w-full">

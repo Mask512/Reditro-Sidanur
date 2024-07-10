@@ -2,14 +2,14 @@ import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { authority, User } from './UserManagement';
 import { ConfirmAlert } from '@/components/ConfirmAlert';
+import { authority, UserType } from '@/utils/api';
 
 export const userColumns = (
   handleDelete: (login: string) => void,
-  _handleUpdate: (user: User) => void,
-  toggleActive: (user: User) => void,
-): ColumnDef<User>[] => [
+  _handleUpdate: (user: UserType) => void,
+  toggleActive: (user: UserType) => void,
+): ColumnDef<UserType>[] => [
   {
     accessorKey: 'id',
     header: 'ID',
@@ -71,9 +71,9 @@ export const userColumns = (
     header: 'Activated',
     cell: ({ row }) => {
       const isActive: boolean = row.getValue('activated');
-      const data = row.original;
+      const user = row.original;
       return (
-        <Button className='w-20' variant={isActive ? 'ghost' : 'secondary'} onClick={() => toggleActive(data)}>
+        <Button className='w-20' variant={isActive ? 'ghost' : 'secondary'} onClick={() => toggleActive(user)}>
           {isActive ? 'Active' : 'Inactive'}
         </Button>
       );

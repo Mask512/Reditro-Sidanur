@@ -10,7 +10,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 interface BreadCrumbProps {
-  pageName: string;
+  pageName?: string;
   parentLinks: { href: string; label: string }[];
 }
 

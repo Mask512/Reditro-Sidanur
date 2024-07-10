@@ -32,6 +32,11 @@ export const dataBidanColumns = (
     header: 'Tanggal Lahir',
   },
   {
+    accessorKey: 'user',
+    header: 'Account',
+    cell: ({row}) => row.original.user ? row.original.user : 'Not Linked' 
+  },
+  {
     id: 'action',
     cell: ({ row }) => {
       return (

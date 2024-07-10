@@ -52,7 +52,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/appointment" element={<Appointment />} />
                 <Route path="/anamnesis" element={<Anamnesis />} />
-                <Route path="/kehamilan" element={<Kehamilan />} />
+                <Route path="/kehamilan/*" element={<Kehamilan />} />
                 <Route path="/persalinan" element={<Persalinan />} />
                 <Route path="/nifas" element={<Nifas />} />
                 <Route path="/kb" element={<KB />} />

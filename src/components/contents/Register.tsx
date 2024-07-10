@@ -67,6 +67,7 @@ const hubunganScheme = z.object({
 });
 
 const formSchema = z.object({
+  id: z.string(),
   nomorPasien: z.string().min(1, 'Required'),
   nik: z.string().min(1, 'Required'),
   nama: z.string().min(1, 'Required'),
@@ -273,7 +274,7 @@ export const Register = () => {
                 <FormLabel>Alamat</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Alamat  . . ."
+                    placeholder="Alamat lengkap"
                     className="resize-none"
                     {...field}
                   />
@@ -428,6 +429,11 @@ export const Register = () => {
             </div>
           </div>
 
+          <Separator />
+          <h3 className="font-semibold underline underline-offset-2">
+            Penanggung Jawab / Hubungan
+          </h3>
+
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-4">
               <FormField
@@ -447,25 +453,10 @@ export const Register = () => {
             <div className="col-span-4">
               <FormField
                 control={form.control}
-                name="noTelpDarurat"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>No. Telepon Penanggung Jawab</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Nomor Telepon" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="col-span-4">
-              <FormField
-                control={form.control}
                 name="hubunganPenanggungJawab"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Hubungan Penanggung Jawab</FormLabel>
+                    <FormLabel>Hubungan</FormLabel>
                     <Select
                       defaultValue={field.value?.id}
                       onValueChange={(value) => {
@@ -493,9 +484,35 @@ export const Register = () => {
                 )}
               />
             </div>
+            <div className="col-span-4">
+              <FormField
+                control={form.control}
+                name="noTelpDarurat"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>No. Telepon</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Nomor Telepon" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
 
-          <Button type="submit">Simpan</Button>
+          <div className="flex gap-2">
+          <Button
+            onClick={() => form.reset()}
+            variant="destructive"
+            className="w-full"
+          >
+            Reset
+          </Button>
+          <Button type="submit" className="w-full">
+            Simpan
+          </Button>
+          </div>
         </form>
       </Form>
     </>

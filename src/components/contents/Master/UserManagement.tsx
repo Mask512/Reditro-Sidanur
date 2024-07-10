@@ -1,35 +1,17 @@
 import { DataTable } from '@/components/ui/data-table';
-import { APP } from '@/data/app';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { userColumns } from './userColumns';
 import { BreadCrumb } from '@/components/BreadCrumb';
+import { deleteUser, getUsers, toggleActiveUser, UserType } from '@/utils/api';
 
-export type authority = 'ROLE_USER' | 'ROLE_ADMIN';
 const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
-export type User = {
-  id: string;
-  login: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  imageUrl: string;
-  activated: boolean;
-  langKey: string;
-  createdBy: string;
-  createdDate: string;
-  lastModifiedBy: string;
-  lastModifiedDate: string;
-  authorities: authority[];
-};
-
 export const UserManagement = () => {
-  const [data, setData] = useState<User[]>([]);
+  const [data, setData] = useState<UserType[]>([]);
 
   const fetchUsers = async () => {
-    const response = await axios.get(`${APP.API_URL}/admin/users`);
-    setData(response.data);
+    const data = await getUsers();
+    setData(data);
   };
 
   useEffect(() => {
@@ -37,30 +19,31 @@ export const UserManagement = () => {
   }, [setData]);
 
   const handleDelete = async (login: string) => {
-    // need fix
-    await axios.delete(`${APP.API_URL}/admin/users/${login}`);
+    await deleteUser(login);
     fetchUsers();
   };
 
-  const handleUpdate = (user: User) => {
+  const handleUpdate = (user: UserType) => {
     // Implement your update logic here
     console.log('update user', user);
   };
 
-  const toggleActive = async (user: User) => {
-    user.activated = !user.activated;
-    await axios.put(`${APP.API_URL}/admin/users`, user);
-    
+  const toggleActive = async (user: UserType) => {
+    await toggleActiveUser(user);
     fetchUsers();
   };
 
   return (
     <>
-      <BreadCrumb pageName='User Management' parentLinks={parentLinks}/>
+      <BreadCrumb pageName="User Management" parentLinks={parentLinks} />
       <h1 className="text-xl font-semibold">User Management</h1>
       <DataTable
         columns={userColumns(handleDelete, handleUpdate, toggleActive)}
         data={data}
+        filterColumns={{
+          key: 'login',
+          placeholder: 'Cari Username ...',
+        }}
       />
     </>
   );

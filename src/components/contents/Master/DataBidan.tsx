@@ -27,6 +27,7 @@ export type DataBidanType = {
   tanggalLahir: string;
   jenisKelamin: string;
   jabatan: string;
+  user: string;
 };
 
 const endpoint = 'bidans';

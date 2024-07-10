@@ -3,15 +3,10 @@ import { Menu } from 'lucide-react';
 // import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { menus } from '@/data/menu';
 
 export const SideNavDrawer = () => {
-  const location = useLocation();
-
-  const isActive = (path: string) => {
-    return location.pathname === path || location.pathname.startsWith(path);
-  };
   return (
     <Sheet>
       {/* Nav Button */}
@@ -25,22 +20,20 @@ export const SideNavDrawer = () => {
       {/* Nav Content */}
       <SheetContent side="left" className="flex flex-col">
         <nav className="grid gap-2 text-lg font-medium">
-          <Link
+          <NavLink
             to="#"
             className="flex items-center gap-2 text-lg font-semibold"
           >
             <Brand className='text-xl'/>
             <span className="sr-only">Home</span>
-          </Link>
+          </NavLink>
           {menus.map((menu) => {
             const Icon = menu.icon;
             return (
-              <Link
+              <NavLink
                 key={menu.link}
                 to={menu.link}
-                className={`${
-                  isActive(menu.link) ? 'link-drawer-active' : 'link-drawer'
-                }`}
+                className={({isActive})=> isActive ? 'link-drawer-active' : 'link-drawer'}
               >
                 <Icon className="h-5 w-5" />
                 {menu.name}
@@ -49,7 +42,7 @@ export const SideNavDrawer = () => {
                     {menu.badge}
                   </Badge>
                 )} */}
-              </Link>
+              </NavLink>
             );
           })}
         </nav>

@@ -10,7 +10,7 @@ import {
   Cake,
   Syringe,
   BellRing,
-  Database
+  Database,
 } from 'lucide-react';
 
 export const menus = [
@@ -53,7 +53,7 @@ export const menus = [
   {
     link: '/kb',
     name: 'KB',
-    icon: CalendarFold ,
+    icon: CalendarFold,
   },
   {
     link: '/imunisasi',
@@ -75,5 +75,44 @@ export const menus = [
     name: 'Master Data',
     icon: Database,
     adminOnly: true, // Custom property to indicate admin-only menu item
+  },
+];
+
+export const masterMenus = [
+  {
+    link: 'data-praktek',
+    name: 'Data Praktek',
+  },
+  {
+    link: 'user-management',
+    name: 'User Management',
+  },
+  {
+    link: 'golongan-darah',
+    name: 'Golongan Darah',
+  },
+  {
+    link: 'pendidikan',
+    name: 'Pendidikan',
+  },
+  {
+    link: 'hubungan',
+    name: 'Penanggung Jawab',
+  },
+  {
+    link: 'pekerjaan',
+    name: 'Pekerjaan',
+  },
+  {
+    link: 'jenis-kb',
+    name: 'Jenis KB',
+  },
+  {
+    link: 'jenis-imunisasi',
+    name: 'Jenis Imunisasi',
+  },
+  {
+    link: 'bidan',
+    name: 'Data Bidan',
   },
 ];

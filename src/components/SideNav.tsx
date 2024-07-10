@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // import { Badge } from '@/components/ui/badge';
 import { Brand } from './Brand';
 import { menus } from '@/data/menu';
@@ -8,13 +8,8 @@ import { useEffect } from 'react';
 import { getAccount } from '@/utils/api';
 
 export const SideNav = () => {
-  const location = useLocation();
   const dispatch = useDispatch();
   const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
-
-  const isActive = (path: string) => {
-    return location.pathname === path || location.pathname.startsWith(path);
-  };
 
   useEffect(() => {
     const fetchAuthorities = async () => {
@@ -53,12 +48,12 @@ export const SideNav = () => {
                 }
                 const Icon = menu.icon;
                 return (
-                  <Link
+                  <NavLink
                     key={menu.link}
                     to={menu.link}
-                    className={`${
-                      isActive(menu.link) ? 'link-active' : 'link'
-                    }`}
+                    className={({ isActive }) =>
+                      isActive ? 'link-active' : 'link'
+                    }
                   >
                     <Icon className="h-4 w-4" />
                     {menu.name}
@@ -67,7 +62,7 @@ export const SideNav = () => {
                         {menu.badge}
                       </Badge>
                     )} */}
-                  </Link>
+                  </NavLink>
                 );
               })}
             </nav>

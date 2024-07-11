@@ -53,10 +53,10 @@ function App() {
                 <Route path="/appointment" element={<Appointment />} />
                 <Route path="/anamnesis" element={<Anamnesis />} />
                 <Route path="/kehamilan/*" element={<Kehamilan />} />
-                <Route path="/persalinan" element={<Persalinan />} />
-                <Route path="/nifas" element={<Nifas />} />
-                <Route path="/kb" element={<KB />} />
-                <Route path="/imunisasi" element={<Imunisasi />} />
+                <Route path="/persalinan/*" element={<Persalinan />} />
+                <Route path="/nifas/*" element={<Nifas />} />
+                <Route path="/kb/*" element={<KB />} />
+                <Route path="/imunisasi/*" element={<Imunisasi />} />
                 <Route path="/riwayat" element={<Riwayat />} />
                 <Route path="/reminder-kb" element={<ReminderKB />} />
                 <Route path="/master-data/*" element={<Master />} />

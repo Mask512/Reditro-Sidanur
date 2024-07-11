@@ -6,6 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { adminLogin, RootState } from '@/store/store';
 import { useEffect } from 'react';
 import { getAccount } from '@/utils/api';
+import { authority } from '@/schema/schema';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@/components/ui/accordion';
 
 export const SideNav = () => {
   const dispatch = useDispatch();
@@ -15,10 +22,13 @@ export const SideNav = () => {
     const fetchAuthorities = async () => {
       try {
         const data = await getAccount();
-        const roles = data.authorities;
-        const isAdmin = roles.find((role) => role === 'ROLE_ADMIN');
-        if (isAdmin) {
-          dispatch(adminLogin());
+        let roles: authority[];
+        if (data && data.authorities) {
+          roles = data.authorities;
+          const isAdmin = roles.find((role) => role === 'ROLE_ADMIN');
+          if (isAdmin) {
+            dispatch(adminLogin());
+          }
         }
       } catch (error) {
         console.error('Error fetching authorities:', error);
@@ -42,29 +52,60 @@ export const SideNav = () => {
 
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              {menus.map((menu) => {
-                if (menu.adminOnly && !isAdmin) {
-                  return null;
-                }
-                const Icon = menu.icon;
-                return (
-                  <NavLink
-                    key={menu.link}
-                    to={menu.link}
-                    className={({ isActive }) =>
-                      isActive ? 'link-active' : 'link'
-                    }
-                  >
-                    <Icon className="h-4 w-4" />
-                    {menu.name}
-                    {/* {menu.badge && (
+              <Accordion type="single" collapsible>
+                {menus.map((menu) => {
+                  if (menu.adminOnly && !isAdmin) {
+                    return null;
+                  }
+                  const Icon = menu.icon;
+                  if (menu.children) {
+                    return (
+                      <AccordionItem key={menu.link} value={menu.link}>
+                        <AccordionTrigger className="py-0">
+                          <div className="link">
+                            <Icon className="h-4 w-4" />
+                            {menu.name}
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <nav className="pl-2">
+                            {menu.children.map((childMenu) => (
+                              <NavLink
+                                key={childMenu.link}
+                                to={childMenu.link}
+                                className={({ isActive }) =>
+                                  isActive ? 'link-active' : 'link'
+                                }
+                              >
+                                <childMenu.icon className="h-4 w-4" />
+                                {childMenu.name}
+                              </NavLink>
+                            ))}
+                          </nav>
+                        </AccordionContent>
+                      </AccordionItem>
+                    );
+                  }
+
+                  return (
+                    <NavLink
+                      key={menu.link}
+                      to={menu.link}
+                      className={({ isActive }) =>
+                        isActive ? 'link-active' : 'link'
+                      }
+                    >
+                      <Icon className="h-4 w-4" />
+                      {menu.name}
+                      {/* {menu.badge && (
                       <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                         {menu.badge}
                       </Badge>
                     )} */}
-                  </NavLink>
-                );
-              })}
+                    </NavLink>
+                  );
+                })}
+              </Accordion>
             </nav>
           </div>
         </div>

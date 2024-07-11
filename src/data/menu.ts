@@ -64,6 +64,28 @@ export const menus = [
     link: '/riwayat',
     name: 'Riwayat',
     icon: FolderClock,
+    children: [
+      {
+        link: '/riwayat/kehamilan',
+        name: 'Riwayat Kehamilan',
+        icon: BookHeart,
+      },
+      {
+        link: '/riwayat/persalinan',
+        name: 'Riwayat Persalinan',
+        icon: Cake,
+      },
+      {
+        link: '/riwayat/nifas',
+        name: 'Riwayat Nifas',
+        icon: LineChart,
+      },
+      {
+        link: '/riwayat/kb',
+        name: 'Riwayat KB',
+        icon: CalendarFold,
+      },
+    ],
   },
   {
     link: '/reminder-kb',

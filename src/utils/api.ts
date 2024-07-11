@@ -1,16 +1,27 @@
 import { PatientType } from '@/components/contents/Register';
 import { APP } from '@/data/app';
 import axios from 'axios';
+import { clearAuth } from './authenticate';
 
 export type authority = 'ROLE_USER' | 'ROLE_ADMIN';
 
 type AccountResponse = {
   authorities: authority[];
-}
+};
 
 export const getAccount = async () => {
-  const { data } = await axios.get(`${APP.API_URL}/account`);
-  return data as AccountResponse;
+  try {
+    const response = await axios.get(`${APP.API_URL}/account`);
+    if (response.data) {
+      return response.data as AccountResponse;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.response.status === 401) {
+      clearAuth();
+    }
+    throw error;
+  }
 };
 
 export type UserType = {
@@ -31,7 +42,7 @@ export type UserType = {
 
 export const getUsers = async () => {
   const { data } = await axios.get(`${APP.API_URL}/admin/users`);
-  return data ;
+  return data;
 };
 
 export const deleteUser = async (login: string) => {
@@ -161,7 +172,7 @@ export const getPatients = async () => {
   }
 };
 
-export const getPatientById = async (id:string) => {
+export const getPatientById = async (id: string) => {
   const { data } = await axios.get(`${APP.API_URL}/pasiens/${id}`);
   if (data) {
     return data;
@@ -169,6 +180,14 @@ export const getPatientById = async (id:string) => {
 };
 
 export const addPatient = async (values: PatientType) => {
-  const response = await axios.post(`${APP.API_URL}/pasiens`, values);  
+  const response = await axios.post(`${APP.API_URL}/pasiens`, values);
   return response;
 };
+
+export const getBidans = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/bidans`);
+  if (data) {
+    return data;
+  }
+};
+

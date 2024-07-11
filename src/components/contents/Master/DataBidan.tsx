@@ -16,6 +16,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { DataBidanForm } from '@/components/DataBidanForm';
+import { getBidans } from '@/utils/api';
 
 export type DataBidanType = {
   id: string;
@@ -30,7 +31,6 @@ export type DataBidanType = {
   user: string;
 };
 
-const endpoint = 'bidans';
 const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export const DataBidan = () => {
@@ -38,7 +38,7 @@ export const DataBidan = () => {
   const [dataBidan, setDataBidan] = useState<DataBidanType[]>([]);
 
   const fetchData = async () => {
-    const { data } = await axios.get(`${APP.API_URL}/${endpoint}`);
+    const data = await getBidans();
     if (data) {
       setDataBidan(data);
     }
@@ -46,7 +46,7 @@ export const DataBidan = () => {
 
   const deleteBidan = async (id: string) => {
     try {
-      const response = await axios.delete(`${APP.API_URL}/${endpoint}/${id}`);
+      const response = await axios.delete(`${APP.API_URL}/bidans/${id}`);
 
       if (response.status === 204) {
         toast({
@@ -59,7 +59,9 @@ export const DataBidan = () => {
       if (error instanceof Error) {
         errorMessage = error.message;
       }
-      alert(errorMessage);
+      toast({
+        description: errorMessage,
+      });
     }
   };
 

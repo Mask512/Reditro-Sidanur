@@ -91,3 +91,21 @@ export const pemeriksaanKBSchema = z.object({
   tinggiBadan: z.string(),
   tanggalKembaliKB: z.string().date(),
 });
+
+export type authority = 'ROLE_USER' | 'ROLE_ADMIN';
+
+export type AccountType = {
+  id?: string;
+  login?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  activated?: boolean;
+  langKey?: string;
+  createdBy?: string;
+  createdDate?: Date | null;
+  lastModifiedBy?: string;
+  lastModifiedDate?: Date | null;
+  password?: string;
+  authorities: authority[];
+};

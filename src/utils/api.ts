@@ -1,19 +1,13 @@
-import { PatientType } from '@/components/contents/Register';
 import { APP } from '@/data/app';
 import axios from 'axios';
 import { clearAuth } from './authenticate';
-
-export type authority = 'ROLE_USER' | 'ROLE_ADMIN';
-
-type AccountResponse = {
-  authorities: authority[];
-};
+import { AccountType, JenisKBType, PatientType } from '@/schema/schema';
 
 export const getAccount = async () => {
   try {
     const response = await axios.get(`${APP.API_URL}/account`);
     if (response.data) {
-      return response.data as AccountResponse;
+      return response.data as AccountType;
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
@@ -22,22 +16,6 @@ export const getAccount = async () => {
     }
     throw error;
   }
-};
-
-export type UserType = {
-  id: string;
-  login: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  imageUrl: string;
-  activated: boolean;
-  langKey: string;
-  createdBy: string;
-  createdDate: string;
-  lastModifiedBy: string;
-  lastModifiedDate: string;
-  authorities: authority[];
 };
 
 export const getUsers = async () => {
@@ -49,7 +27,7 @@ export const deleteUser = async (login: string) => {
   await axios.delete(`${APP.API_URL}/admin/users/${login}`);
 };
 
-export const toggleActiveUser = async (user: UserType) => {
+export const toggleActiveUser = async (user: AccountType) => {
   user.activated = !user.activated;
   await axios.put(`${APP.API_URL}/admin/users`, user);
 };
@@ -136,11 +114,6 @@ export const updateDataPraktek = async (
   newData: DataPraktekType,
 ) => {
   await axios.put(`${APP.API_URL}/lokasi-prakteks/${id}`, newData);
-};
-
-export type JenisKBType = {
-  id: string;
-  nama: string;
 };
 
 export const getJenisKBs = async () => {

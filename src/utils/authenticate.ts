@@ -10,8 +10,8 @@ export const setAuthenticateHeader = (token: string | null) => {
 };
 
 export const clearAuth = () => {
-  setAuthenticateHeader(null);
   localStorage.clear();
   sessionStorage.clear();
+  setAuthenticateHeader(null);
   store.dispatch(logout());
 };

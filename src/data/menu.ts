@@ -74,7 +74,7 @@ export const menus = [
     link: '/master-data',
     name: 'Master Data',
     icon: Database,
-    adminOnly: true, // Custom property to indicate admin-only menu item
+    adminOnly: true,
   },
 ];
 

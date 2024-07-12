@@ -178,3 +178,9 @@ export const getRiwayatImunisasi = async () => {
   }
 };
 
+export const getRiwayatNifas = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/pemeriksaan-nifas`);
+  if (data) {
+    return data;
+  }
+};

@@ -184,3 +184,11 @@ export const getRiwayatNifas = async () => {
     return data;
   }
 };
+
+export const getRiwayatKehamilan = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/pemeriksaan-kehamilans`);
+  if (data) {
+    return data;
+  }
+};
+

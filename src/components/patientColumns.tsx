@@ -29,6 +29,10 @@ export const patientColumns = (
     header: 'NIK KTP',
   },
   {
+    accessorKey: 'alamat',
+    header: 'Alamat',
+  },
+  {
     accessorKey: 'tempatLahir',
     header: 'Tempat Lahir',
   },
@@ -63,11 +67,13 @@ export const patientColumns = (
     id: 'action',
     cell: ({ row }) => {
       const { id } = row.original;
-      return (
-        <Button>
-          <Link to={action(id)}>Periksa</Link>
-        </Button>
-      );
+      if (id) {
+        return (
+          <Button>
+            <Link to={action(id)}>Periksa</Link>
+          </Button>
+        );
+      }
     },
   },
 ];

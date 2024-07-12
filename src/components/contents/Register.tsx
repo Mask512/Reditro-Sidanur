@@ -120,6 +120,13 @@ export const Register = () => {
         title: 'Sukses!',
         description: 'Pasien berhasil ditambahkan',
       });
+
+      const data = await getTotalPatients();
+      if (data) {
+        const rmNumber = getLastRMNum(data);
+        setLastRMNumber(rmNumber);
+        form.setValue('nomorPasien', rmNumber);
+      }
     }
   };
 

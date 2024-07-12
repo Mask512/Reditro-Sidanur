@@ -142,6 +142,34 @@ export const pemeriksaanNifasSchema = z.object({
   pasien: patientSchema,
 });
 
+export const pemeriksaanKehamilanSchema = z.object({
+  tanggalPemeriksaan: z.string().date(),
+  anamnesa: z.string(),
+  ttvTekananDarah: z.string(),
+  ttvNadi: z.string(),
+  ttvSuhu: z.string(),
+  ttvRespirasi: z.string(),
+  ttvSPO2: z.string(),
+  ttvBeratBdan: z.string(),
+  ttvTinggiBadan: z.string(),
+  riwayatKehamilanGPA1: z.string(),
+  riwayatKehamilanGPA2: z.string(),
+  riwayatKehamilanGPA3: z.string(),
+  riwayatKehamilanHPHT: z.string().date(),
+  riwayatKehamilanTPorHPL: z.string().date(),
+  pemeriksaanUsiaKehamilan: z.string(),
+  pemeriksaanTFU: z.string(),
+  letakBayi: z.string(),
+  pemeriksaanLILA: z.string(),
+  pemeriksaanDJJ: z.string(),
+  diagnosa: z.string(),
+  planningAsuhan: z.string(),
+  planningObat: z.string(),
+  planningTindakan: z.string(),
+  bidan: bidanSchema,
+  pasien: patientSchema
+});
+
 export type Authority = z.infer<typeof authoritySchema>;
 export type AccountType = z.infer<typeof accountTypeSchema>;
 export type PatientType = z.infer<typeof patientSchema>;
@@ -152,3 +180,4 @@ export type BidanType = z.infer<typeof bidanSchema>;
 export type PemeriksaanKBType = z.infer<typeof pemeriksaanKBSchema>;
 export type PemeriksaanImunisasiType = z.infer<typeof pemeriksaanImunisasiSchema>;
 export type PemeriksaanNifasType = z.infer<typeof pemeriksaanNifasSchema>;
+export type PemeriksaanKehamilanType = z.infer<typeof pemeriksaanKehamilanSchema>;

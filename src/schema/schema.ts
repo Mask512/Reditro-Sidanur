@@ -170,9 +170,32 @@ export const pemeriksaanKehamilanSchema = z.object({
   pasien: patientSchema
 });
 
+export const YesOrNoSchema = z.enum(['YES', 'NO']);
+export const JenisKelaminAnak = z.enum(['LAKI_LAKI', 'PEREMPUAN']);
+export const KeadaanSchema = z.enum(['MENINGGAL', 'HIDUP']);
+
+export const persalinanSchema = z.object({
+  beratBadan: z.string(),
+  bidan: bidanSchema,
+  imd: YesOrNoSchema,
+  jamPersalinan: z.string().regex(/^(?:[0-2]\d):[0-5]\d$/),
+  jenisKelaminAnak: JenisKelaminAnak,
+  keadaanAnak: KeadaanSchema,
+  keadaanIbu: KeadaanSchema,
+  komplikasi: z.string(),
+  namaAnak: z.string().min(1, 'Required'),
+  panjangBadanAnak: z.string(),
+  pasien: patientSchema,
+  resusitasi: z.string(),
+  tanggalPersalinan: z.string().date(),
+  vitaminK: YesOrNoSchema,
+  golonganDarah : golonganDarahScheme.optional().nullable(),
+});
+
 export type Authority = z.infer<typeof authoritySchema>;
 export type AccountType = z.infer<typeof accountTypeSchema>;
 export type PatientType = z.infer<typeof patientSchema>;
+export type GolonganDarahType = z.infer<typeof golonganDarahScheme>;
 export type JenisKBType = z.infer<typeof jenisKBSchema>;
 export type UserType = z.infer<typeof userSchema>;
 export type LokasiPraktekType = z.infer<typeof lokasiPraktekSchema>;
@@ -181,3 +204,4 @@ export type PemeriksaanKBType = z.infer<typeof pemeriksaanKBSchema>;
 export type PemeriksaanImunisasiType = z.infer<typeof pemeriksaanImunisasiSchema>;
 export type PemeriksaanNifasType = z.infer<typeof pemeriksaanNifasSchema>;
 export type PemeriksaanKehamilanType = z.infer<typeof pemeriksaanKehamilanSchema>;
+export type PersalinanType = z.infer<typeof persalinanSchema>;

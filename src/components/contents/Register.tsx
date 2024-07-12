@@ -33,11 +33,10 @@ import {
 } from '@/utils/api';
 import { toast } from '@/components/ui/use-toast';
 
-import { BloodTypes } from './Master/GolonganDarah';
 import { PendidikanType } from './Master/Pendidikan';
 import { PekerjaanType } from './Master/Pekerjaan';
 import { HubunganType } from './Master/Hubungan';
-import { patientSchema, PatientType } from '@/schema/schema';
+import { GolonganDarahType, patientSchema, PatientType } from '@/schema/schema';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
@@ -58,7 +57,7 @@ export const Register = () => {
   });
 
   const [lastRMNumber, setLastRMNumber] = useState('');
-  const [golonganDarah, setGolonganDarah] = useState<BloodTypes[]>([]);
+  const [golonganDarah, setGolonganDarah] = useState<GolonganDarahType[]>([]);
   const [pendidikan, setPendidikan] = useState<PendidikanType[]>([]);
   const [pekerjaan, setPekerjaan] = useState<PekerjaanType[]>([]);
   const [hubungan, setHubungan] = useState<HubunganType[]>([]);

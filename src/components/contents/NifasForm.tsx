@@ -108,12 +108,10 @@ export const NifasForm = () => {
       <div className="grid gap-4 max-w-4xl">
         <PatientBiodata patientData={patientData} />
 
-        <div>
-          <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-            Nifas
-          </h4>
-          <Separator />
-        </div>
+        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+          Form Pemeriksaan Nifas
+        </h4>
+        <Separator />
 
         <Form {...form}>
           <form

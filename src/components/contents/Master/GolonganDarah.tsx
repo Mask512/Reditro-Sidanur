@@ -9,16 +9,12 @@ import {
   deleteGolonganDarah,
   getGolonganDarahs,
 } from '@/utils/api';
-
-export type BloodTypes = {
-  id: string;
-  nama: string;
-};
+import { GolonganDarahType } from '@/schema/schema';
 
 const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export const GolonganDarah = () => {
-  const [dataDarah, setDataDarah] = useState<BloodTypes[]>([]);
+  const [dataDarah, setDataDarah] = useState<GolonganDarahType[]>([]);
   const [golonganDarah, setGolonganDarah] = useState('');
 
   const fetchData = async () => {

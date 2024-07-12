@@ -192,3 +192,10 @@ export const getRiwayatKehamilan = async () => {
   }
 };
 
+export const getRiwayatPersalinan = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/persalinans`);
+  if (data) {
+    return data;
+  }
+};
+

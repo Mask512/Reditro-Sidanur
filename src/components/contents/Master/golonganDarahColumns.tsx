@@ -1,11 +1,11 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { BloodTypes } from './GolonganDarah';
 import { ConfirmAlert } from '@/components/ConfirmAlert';
 import { Trash } from 'lucide-react';
+import { GolonganDarahType } from '@/schema/schema';
 
 export const golonganDarahColumns = (
   handleDelete: (id: string) => void,
-): ColumnDef<BloodTypes>[] => [
+): ColumnDef<GolonganDarahType>[] => [
   {
     accessorKey: 'nama',
     header: 'Golongan Darah',

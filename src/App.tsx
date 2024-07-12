@@ -22,6 +22,7 @@ import { RiwayatKB } from './components/contents/Riwayat/RiwayatKB';
 import { RiwayatImunisasi } from './components/contents/Riwayat/RiwayatImunisasi';
 import { RiwayatNifas } from './components/contents/Riwayat/RiwayatNifas';
 import { RiwayatKehamilan } from './components/contents/Riwayat/RiwayatKehamilan';
+import { RiwayatPersalinan } from './components/contents/Riwayat/RiwayatPersalinan';
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -61,7 +62,7 @@ function App() {
                 <Route path="/kb/*" element={<KB />} />
                 <Route path="/imunisasi/*" element={<Imunisasi />} />
                 <Route path="/riwayat-kehamilan" element={<RiwayatKehamilan />} />
-                <Route path="/riwayat-persalinan" element={<RiwayatKB />} />
+                <Route path="/riwayat-persalinan" element={<RiwayatPersalinan />} />
                 <Route path="/riwayat-nifas" element={<RiwayatNifas />} />
                 <Route path="/riwayat-kb" element={<RiwayatKB />} />
                 <Route path="/riwayat-imunisasi" element={<RiwayatImunisasi />} />

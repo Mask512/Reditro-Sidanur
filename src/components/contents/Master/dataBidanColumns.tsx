@@ -1,12 +1,12 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { DataBidanType } from './DataBidan';
 import { Button } from '@/components/ui/button';
 import { ConfirmAlert } from '@/components/ConfirmAlert';
 import { Trash } from 'lucide-react';
+import { BidanType } from '@/schema/schema';
 
 export const dataBidanColumns = (
   deleteBidan: (id: string) => void,
-): ColumnDef<DataBidanType>[] => [
+): ColumnDef<BidanType>[] => [
   {
     accessorKey: 'nama',
     header: 'Nama',

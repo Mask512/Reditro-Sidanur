@@ -66,24 +66,29 @@ export const menus = [
     icon: FolderClock,
     children: [
       {
-        link: '/riwayat/kehamilan',
+        link: '/riwayat-kehamilan',
         name: 'Riwayat Kehamilan',
         icon: BookHeart,
       },
       {
-        link: '/riwayat/persalinan',
+        link: '/riwayat-persalinan',
         name: 'Riwayat Persalinan',
         icon: Cake,
       },
       {
-        link: '/riwayat/nifas',
+        link: '/riwayat-nifas',
         name: 'Riwayat Nifas',
         icon: LineChart,
       },
       {
-        link: '/riwayat/kb',
+        link: '/riwayat-kb',
         name: 'Riwayat KB',
         icon: CalendarFold,
+      },
+      {
+        link: '/riwayat-imunisasi',
+        name: 'Riwayat Imunisasi',
+        icon: Syringe,
       },
     ],
   },

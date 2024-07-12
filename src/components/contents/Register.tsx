@@ -6,7 +6,6 @@ import { Separator } from '@/components/ui/separator';
 import {
   Form,
   FormControl,
-  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -38,57 +37,13 @@ import { BloodTypes } from './Master/GolonganDarah';
 import { PendidikanType } from './Master/Pendidikan';
 import { PekerjaanType } from './Master/Pekerjaan';
 import { HubunganType } from './Master/Hubungan';
+import { patientSchema, PatientType } from '@/schema/schema';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-const pendidikanScheme = z.object({
-  id: z.string(),
-  nama: z.string(),
-  pasiens: z.null(),
-});
-
-const pekerjaanScheme = z.object({
-  id: z.string(),
-  nama: z.string(),
-  pasiens: z.null(),
-});
-
-const golonganDarahScheme = z.object({
-  id: z.string(),
-  nama: z.string(),
-  pasiens: z.null(),
-  persalinans: z.null(),
-});
-
-const hubunganScheme = z.object({
-  id: z.string(),
-  nama: z.string(),
-  pasiens: z.null(),
-});
-
-const formSchema = z.object({
-  id: z.string(),
-  nomorPasien: z.string().min(1, 'Required'),
-  nik: z.string().min(1, 'Required'),
-  nama: z.string().min(1, 'Required'),
-  tempatLahir: z.string().min(1, 'Required'),
-  tanggalLahir: z.string().date(),
-  alamat: z.string().min(1, 'Required'),
-  jenisKelamin: z.enum(['PRIA', 'WANITA']),
-  noTelp: z.string().min(1, 'Required'),
-  noTelpDarurat: z.string(),
-  golonganDarah: z.optional(golonganDarahScheme),
-  pendidikan: z.optional(pendidikanScheme),
-  pekerjaan: z.optional(pekerjaanScheme),
-  namaPenanggungJawab: z.string(),
-  hubunganPenanggungJawab: z.optional(hubunganScheme),
-});
-
-export type PatientType = z.infer<typeof formSchema>;
-
 export const Register = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<PatientType>({
+    resolver: zodResolver(patientSchema),
     defaultValues: {
       nik: '',
       nama: '',
@@ -109,7 +64,7 @@ export const Register = () => {
   const [hubungan, setHubungan] = useState<HubunganType[]>([]);
 
   useEffect(() => {
-    const lastRM = async () => {
+    const getLastRM = async () => {
       const data = await getTotalPatients();
       if (data) {
         const rmNumber = getLastRMNum(data);
@@ -117,54 +72,45 @@ export const Register = () => {
         form.setValue('nomorPasien', rmNumber);
       }
     };
-    lastRM();
+    getLastRM();
   }, [form]);
 
-  useEffect(() => {
-    const fetchGolDarah = async () => {
-      const data = await getGolonganDarahs();
-      if (data) {
-        setGolonganDarah(data);
-      }
-    };
+  const fetchGolDarah = async () => {
+    const data = await getGolonganDarahs();
+    if (data) {
+      setGolonganDarah(data);
+    }
+  };
 
+  const fetchPendidikan = async () => {
+    const data = await getPendidikans();
+    if (data) {
+      setPendidikan(data);
+    }
+  };
+
+  const fetchPekerjaan = async () => {
+    const data = await getPekerjaans();
+    if (data) {
+      setPekerjaan(data);
+    }
+  };
+
+  const fetchHubungan = async () => {
+    const data = await getHubungans();
+    if (data) {
+      setHubungan(data);
+    }
+  };
+
+  useEffect(() => {
     fetchGolDarah();
-  }, []);
-
-  useEffect(() => {
-    const fetchPendidikan = async () => {
-      const data = await getPendidikans();
-      if (data) {
-        setPendidikan(data);
-      }
-    };
-
     fetchPendidikan();
-  }, []);
-
-  useEffect(() => {
-    const fetchPekerjaan = async () => {
-      const data = await getPekerjaans();
-      if (data) {
-        setPekerjaan(data);
-      }
-    };
-
     fetchPekerjaan();
-  }, []);
-
-  useEffect(() => {
-    const fetchHubungan = async () => {
-      const data = await getHubungans();
-      if (data) {
-        setHubungan(data);
-      }
-    };
-
     fetchHubungan();
   }, []);
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof patientSchema>) => {
     const response = await addPatient(values);
 
     if (response.status === 201) {
@@ -502,16 +448,16 @@ export const Register = () => {
           </div>
 
           <div className="flex gap-2">
-          <Button
-            onClick={() => form.reset()}
-            variant="destructive"
-            className="w-full"
-          >
-            Reset
-          </Button>
-          <Button type="submit" className="w-full">
-            Simpan
-          </Button>
+            <Button
+              onClick={() => form.reset()}
+              variant="destructive"
+              className="w-full"
+            >
+              Reset
+            </Button>
+            <Button type="submit" className="w-full">
+              Simpan
+            </Button>
           </div>
         </form>
       </Form>

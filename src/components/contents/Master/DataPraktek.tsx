@@ -2,12 +2,13 @@ import { BreadCrumb } from '@/components/BreadCrumb';
 import { DataTable } from '@/components/ui/data-table';
 import { useEffect, useState } from 'react';
 import { dataPraktekColumns } from './dataPraktekColumns';
-import { DataPraktekType, getDataPraktek, updateDataPraktek } from '@/utils/api';
+import { getDataPraktek, updateDataPraktek } from '@/utils/api';
+import { LokasiPraktekType } from '@/schema/schema';
 
 const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export const DataPraktek = () => {
-  const [dataLokasi, setDataLokasi] = useState<DataPraktekType[]>([]);
+  const [dataLokasi, setDataLokasi] = useState<LokasiPraktekType[]>([]);
 
   const fetchData = async () => {
     const data = await getDataPraktek();
@@ -18,7 +19,7 @@ export const DataPraktek = () => {
     fetchData();
   }, [setDataLokasi]);
 
-  const handleEdit = async (id:string, newData: DataPraktekType ) => {
+  const handleEdit = async (id:string, newData: LokasiPraktekType ) => {
     await updateDataPraktek(id, newData);
     fetchData();
   };

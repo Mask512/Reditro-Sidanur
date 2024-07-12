@@ -2,12 +2,13 @@ import { DataTable } from '@/components/ui/data-table';
 import { useEffect, useState } from 'react';
 import { userColumns } from './userColumns';
 import { BreadCrumb } from '@/components/BreadCrumb';
-import { deleteUser, getUsers, toggleActiveUser, UserType } from '@/utils/api';
+import { deleteUser, getUsers, toggleActiveUser } from '@/utils/api';
+import { AccountType } from '@/schema/schema';
 
 const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export const UserManagement = () => {
-  const [data, setData] = useState<UserType[]>([]);
+  const [data, setData] = useState<AccountType[]>([]);
 
   const fetchUsers = async () => {
     const data = await getUsers();
@@ -23,12 +24,12 @@ export const UserManagement = () => {
     fetchUsers();
   };
 
-  const handleUpdate = (user: UserType) => {
+  const handleUpdate = (user: AccountType) => {
     // Implement your update logic here
     console.log('update user', user);
   };
 
-  const toggleActive = async (user: UserType) => {
+  const toggleActive = async (user: AccountType) => {
     await toggleActiveUser(user);
     fetchUsers();
   };

@@ -17,25 +17,14 @@ import {
 } from '@/components/ui/dialog';
 import { DataBidanForm } from '@/components/DataBidanForm';
 import { getBidans } from '@/utils/api';
+import { BidanType } from '@/schema/schema';
 
-export type DataBidanType = {
-  id: string;
-  nama: string;
-  alamat: string;
-  noHp: string;
-  noSTR: string;
-  tempatLahir: string;
-  tanggalLahir: string;
-  jenisKelamin: string;
-  jabatan: string;
-  user: string;
-};
 
 const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export const DataBidan = () => {
   const { toast } = useToast();
-  const [dataBidan, setDataBidan] = useState<DataBidanType[]>([]);
+  const [dataBidan, setDataBidan] = useState<BidanType[]>([]);
 
   const fetchData = async () => {
     const data = await getBidans();

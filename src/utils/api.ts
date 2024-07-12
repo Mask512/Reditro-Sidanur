@@ -1,7 +1,7 @@
 import { APP } from '@/data/app';
 import axios from 'axios';
 import { clearAuth } from './authenticate';
-import { AccountType, JenisKBType, PatientType } from '@/schema/schema';
+import { AccountType, JenisKBType, LokasiPraktekType, PatientType } from '@/schema/schema';
 
 export const getAccount = async () => {
   try {
@@ -97,21 +97,15 @@ export const deleteGolonganDarah = async (id: string) => {
   await axios.delete(`${APP.API_URL}/golongan-darahs/${id}`);
 };
 
-export type DataPraktekType = {
-  id: string;
-  nama: string;
-  alamat: string;
-  bidan: string | null;
-};
 
 export const getDataPraktek = async () => {
   const { data } = await axios.get(`${APP.API_URL}/lokasi-prakteks`);
-  return data as DataPraktekType[];
+  return data as LokasiPraktekType[];
 };
 
 export const updateDataPraktek = async (
   id: string,
-  newData: DataPraktekType,
+  newData: LokasiPraktekType,
 ) => {
   await axios.put(`${APP.API_URL}/lokasi-prakteks/${id}`, newData);
 };
@@ -159,6 +153,26 @@ export const addPatient = async (values: PatientType) => {
 
 export const getBidans = async () => {
   const { data } = await axios.get(`${APP.API_URL}/bidans`);
+  if (data) {
+    return data;
+  }
+};
+export const getRiwayatKB = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/keluarga-berencanas`);
+  if (data) {
+    return data;
+  }
+};
+
+export const getJenisImunisasi = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/jenis-imunisasis`);
+  if (data) {
+    return data;
+  }
+};
+
+export const getRiwayatImunisasi = async () => {
+  const { data } = await axios.get(`${APP.API_URL}/imunisasis`);
   if (data) {
     return data;
   }

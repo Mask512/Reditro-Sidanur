@@ -8,7 +8,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
 import { ArrowLeft } from 'lucide-react';
 import { z } from 'zod';
@@ -193,7 +192,6 @@ export const RegisterForm = ({ setIsRegister }: RegisterFormProps) => {
       <Button onClick={() => setIsRegister(false)} variant="link" className='ml-auto'>
         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Login
       </Button>
-      <Toaster/>
     </>
   );
 };

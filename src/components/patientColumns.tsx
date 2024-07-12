@@ -1,14 +1,24 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { PatientType } from './contents/Register';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
+import { PatientType } from '@/schema/schema';
+import { ArrowUpDown } from 'lucide-react';
 
 export const patientColumns = (
   action: (id: string) => string,
 ): ColumnDef<PatientType>[] => [
   {
     accessorKey: 'nomorPasien',
-    header: 'No. RM',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Nomor RM <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: 'nama',
@@ -34,14 +44,7 @@ export const patientColumns = (
     accessorKey: 'golonganDarah',
     header: 'Gol. Darah',
     cell: ({ row }) => {
-      return row.original.golonganDarah?.id;
-    },
-  },
-  {
-    accessorKey: 'hubunganPenanggungJawab',
-    header: 'Hubungan',
-    cell: ({ row }) => {
-      return row.original.hubunganPenanggungJawab?.id;
+      return row.original.golonganDarah?.nama;
     },
   },
   {
@@ -49,9 +52,17 @@ export const patientColumns = (
     header: 'Penanggung Jawab',
   },
   {
+    accessorKey: 'hubunganPenanggungJawab',
+    header: 'Hubungan',
+    cell: ({ row }) => {
+      return row.original.hubunganPenanggungJawab?.nama;
+    },
+  },
+
+  {
     id: 'action',
     cell: ({ row }) => {
-      const {id} = row.original ;
+      const { id } = row.original;
       return (
         <Button>
           <Link to={action(id)}>Periksa</Link>

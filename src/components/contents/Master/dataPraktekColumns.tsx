@@ -1,5 +1,4 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { DataPraktekType } from './DataPraktek';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -13,10 +12,11 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import React, { ChangeEvent, useState } from 'react';
+import { LokasiPraktekType } from '@/schema/schema';
 
 type DataPraktekFormProps = {
-  data: DataPraktekType;
-  handleEdit: (id: string, newData: DataPraktekType) => void;
+  data: LokasiPraktekType;
+  handleEdit: (id: string, newData: LokasiPraktekType) => void;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -24,11 +24,10 @@ const DataPraktekForm: React.FC<DataPraktekFormProps> = ({
   data,
   handleEdit,
 }) => {
-  const [newData, setNewData] = useState<DataPraktekType>({
+  const [newData, setNewData] = useState<LokasiPraktekType>({
     id: data.id,
     nama: data.nama,
     alamat: data.alamat,
-    bidan: data.bidan || null,
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -83,8 +82,8 @@ const DataPraktekForm: React.FC<DataPraktekFormProps> = ({
 };
 
 export const dataPraktekColumns = (
-  handleEdit: (id: string, newData: DataPraktekType) => void,
-): ColumnDef<DataPraktekType>[] => [
+  handleEdit: (id: string, newData: LokasiPraktekType) => void,
+): ColumnDef<LokasiPraktekType>[] => [
   {
     accessorKey: 'nama',
     header: 'Nama Lokasi Praktek',

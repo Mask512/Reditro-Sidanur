@@ -6,8 +6,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Separator } from '../ui/separator';
-import { PatientType } from './Register';
 import { calculateAge } from '@/utils/calculateAge';
+import { PatientType } from '@/schema/schema';
 
 type PatientBiodataProps = {
   patientData: PatientType | null;

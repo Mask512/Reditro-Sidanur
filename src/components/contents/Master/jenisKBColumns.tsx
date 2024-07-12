@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { JenisKBType } from './JenisKB';
 import { ConfirmAlert } from '@/components/ConfirmAlert';
 import { Trash } from 'lucide-react';
+import { JenisKBType } from '@/schema/schema';
 
 export const jenisKBColumns = (
   handleDelete: (id: string) => void,

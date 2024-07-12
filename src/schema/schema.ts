@@ -20,8 +20,34 @@ export const hubunganScheme = z.object({
   nama: z.string(),
 });
 
-export const patientSchema = z.object({
+export const jenisImunisasiScheme = z.object({
   id: z.string(),
+  nama: z.string(),
+});
+
+export const authoritySchema = z.union([
+  z.literal('ROLE_USER'),
+  z.literal('ROLE_ADMIN'),
+]);
+
+export const accountTypeSchema = z.object({
+  id: z.string().optional(),
+  login: z.string(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  email: z.string().optional(),
+  activated: z.boolean().optional(),
+  langKey: z.string().optional(),
+  createdBy: z.string().optional(),
+  createdDate: z.date().optional().nullable(),
+  lastModifiedBy: z.string().optional(),
+  lastModifiedDate: z.date().optional().nullable(),
+  password: z.string().optional(),
+  authorities: z.array(authoritySchema),
+});
+
+export const patientSchema = z.object({
+  id: z.string().optional(),
   nomorPasien: z.string().min(1, 'Required'),
   nik: z.string().min(1, 'Required'),
   nama: z.string().min(1, 'Required'),
@@ -30,7 +56,7 @@ export const patientSchema = z.object({
   alamat: z.string().min(1, 'Required'),
   jenisKelamin: z.enum(['PRIA', 'WANITA']),
   noTelp: z.string().min(1, 'Required'),
-  noTelpDarurat: z.string(),
+  noTelpDarurat: z.string().optional(),
   golonganDarah: z.optional(golonganDarahScheme),
   pendidikan: z.optional(pendidikanScheme),
   pekerjaan: z.optional(pekerjaanScheme),
@@ -38,28 +64,21 @@ export const patientSchema = z.object({
   hubunganPenanggungJawab: z.optional(hubunganScheme),
 });
 
-export type PatientType = z.infer<typeof patientSchema>;
-
 export const jenisKBSchema = z.object({
   id: z.string(),
   nama: z.string(),
 });
-
-export type JenisKBType = z.infer<typeof jenisKBSchema>;
 
 export const lokasiPraktekSchema = z.object({
   id: z.string(),
   nama: z.string(),
   alamat: z.string(),
 });
-export type UserType = z.infer<typeof userSchema>;
 
 export const userSchema = z.object({
   id: z.string(),
   login: z.string(),
 });
-
-export type LokasiPraktekType = z.infer<typeof userSchema>;
 
 export const bidanSchema = z.object({
   id: z.string(),
@@ -80,9 +99,8 @@ export const bidanSchema = z.object({
   pemeriksaanNifas: z.string().nullable(),
 });
 
-export type BidanType = z.infer<typeof bidanSchema>;
-
 export const pemeriksaanKBSchema = z.object({
+  id: z.string().optional(),
   bidan: bidanSchema,
   jenisKB: jenisKBSchema,
   pasien: patientSchema,
@@ -90,22 +108,26 @@ export const pemeriksaanKBSchema = z.object({
   beratBadan: z.string(),
   tinggiBadan: z.string(),
   tanggalKembaliKB: z.string().date(),
+  riwayatRekamMedis: z.string().nullable().optional(),
 });
 
-export type authority = 'ROLE_USER' | 'ROLE_ADMIN';
+export const pemeriksaanImunisasiSchema = z.object({
+  id: z.string().optional(),
+  bidan: bidanSchema,
+  jenisImunisasi: jenisImunisasiScheme,
+  pasien: patientSchema,
+  beratBadan: z.string(),
+  panjangBadan: z.string(),
+  tanggalImunisasi: z.string().date(),
+  tanggalKembaliImunisasi: z.string().date(),
+});
 
-export type AccountType = {
-  id?: string;
-  login?: string;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  activated?: boolean;
-  langKey?: string;
-  createdBy?: string;
-  createdDate?: Date | null;
-  lastModifiedBy?: string;
-  lastModifiedDate?: Date | null;
-  password?: string;
-  authorities: authority[];
-};
+export type Authority = z.infer<typeof authoritySchema>;
+export type AccountType = z.infer<typeof accountTypeSchema>;
+export type PatientType = z.infer<typeof patientSchema>;
+export type JenisKBType = z.infer<typeof jenisKBSchema>;
+export type UserType = z.infer<typeof userSchema>;
+export type LokasiPraktekType = z.infer<typeof lokasiPraktekSchema>;
+export type BidanType = z.infer<typeof bidanSchema>;
+export type PemeriksaanKBType = z.infer<typeof pemeriksaanKBSchema>;
+export type PemeriksaanImunisasiType = z.infer<typeof pemeriksaanImunisasiSchema>;

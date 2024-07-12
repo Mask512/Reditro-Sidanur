@@ -16,9 +16,10 @@ import { Kehamilan } from './components/contents/Kehamilan';
 import { Nifas } from './components/contents/Nifas';
 import { KB } from './components/contents/KB';
 import { Imunisasi } from './components/contents/Imunisasi';
-import { Riwayat } from './components/contents/Riwayat';
 import { Persalinan } from './components/contents/Persalinan';
 import { ReminderKB } from './components/contents/ReminderKB';
+import { RiwayatKB } from './components/contents/Riwayat/RiwayatKB';
+import { RiwayatImunisasi } from './components/contents/Riwayat/RiwayatImunisasi';
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -57,9 +58,14 @@ function App() {
                 <Route path="/nifas/*" element={<Nifas />} />
                 <Route path="/kb/*" element={<KB />} />
                 <Route path="/imunisasi/*" element={<Imunisasi />} />
-                <Route path="/riwayat" element={<Riwayat />} />
+                <Route path="/riwayat-kehamilan" element={<RiwayatKB />} />
+                <Route path="/riwayat-persalinan" element={<RiwayatKB />} />
+                <Route path="/riwayat-nifas" element={<RiwayatKB />} />
+                <Route path="/riwayat-kb" element={<RiwayatKB />} />
+                <Route path="/riwayat-imunisasi" element={<RiwayatImunisasi />} />
                 <Route path="/reminder-kb" element={<ReminderKB />} />
                 <Route path="/master-data/*" element={<Master />} />
+                <Route path="*" element={<Dashboard />} />
               </Routes>
             </main>
           </div>

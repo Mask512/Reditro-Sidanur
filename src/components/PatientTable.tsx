@@ -1,8 +1,8 @@
 import { DataTable } from '@/components/ui/data-table';
 import { patientColumns } from './patientColumns';
 import { useEffect, useState } from 'react';
-import { PatientType } from './contents/Register';
 import { getPatients } from '@/utils/api';
+import { PatientType } from '@/schema/schema';
 
 type PatientTableProps = {
   action: (id: string)=> string

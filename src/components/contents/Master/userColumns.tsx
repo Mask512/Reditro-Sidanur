@@ -3,13 +3,13 @@ import { ArrowUpDown, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ConfirmAlert } from '@/components/ConfirmAlert';
-import { authority, UserType } from '@/utils/api';
+import { AccountType, authority } from '@/schema/schema';
 
 export const userColumns = (
   handleDelete: (login: string) => void,
-  _handleUpdate: (user: UserType) => void,
-  toggleActive: (user: UserType) => void,
-): ColumnDef<UserType>[] => [
+  _handleUpdate: (user: AccountType) => void,
+  toggleActive: (user: AccountType) => void,
+): ColumnDef<AccountType>[] => [
   {
     accessorKey: 'id',
     header: 'ID',

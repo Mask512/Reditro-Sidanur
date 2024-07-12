@@ -17,44 +17,13 @@ import {
 } from '@/components/ui/select';
 import { toast } from '@/components/ui/use-toast';
 
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { DialogFooter } from './ui/dialog';
 import axios from 'axios';
 import { APP } from '@/data/app';
 import { useEffect, useState } from 'react';
-import { isValid, parseISO } from 'date-fns';
-
-const lokasiPraktekSchema = z.object({
-  id: z.string(),
-  nama: z.string(),
-  alamat: z.string(),
-  bidans: z.string().nullable(),
-});
-const userSchema = z.object({
-  id: z.number(),
-  login: z.string(),
-});
-
-const schema = z.object({
-  nama: z.string(),
-  alamat: z.string(),
-  noHp: z.string(),
-  noSTR: z.string(),
-  tempatLahir: z.string(),
-  tanggalLahir: z.string().refine((date) => {
-    return isValid(parseISO(date));
-  }, 'Tanggal Lahir harus dalam format YYYY-MM-DD'),
-  jenisKelamin: z.enum(['PRIA', 'WANITA']),
-  jabatan: z.string(),
-  lokasiPraktek: z.optional(lokasiPraktekSchema),
-  user: z.optional(userSchema),
-});
-
-type FormFields = z.infer<typeof schema>;
-export type LokasiPraktekType = z.infer<typeof lokasiPraktekSchema>;
-export type UserType = z.infer<typeof userSchema>;
+import { bidanSchema, BidanType, LokasiPraktekType, UserType } from '@/schema/schema';
 
 interface DataBidanFormProps {
   onSubmitSuccess?: () => void;
@@ -94,8 +63,8 @@ export const DataBidanForm: React.FC<DataBidanFormProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const form = useForm<FormFields>({
-    resolver: zodResolver(schema),
+  const form = useForm<BidanType>({
+    resolver: zodResolver(bidanSchema),
     defaultValues: {
       alamat: '',
       jabatan: '',
@@ -108,7 +77,7 @@ export const DataBidanForm: React.FC<DataBidanFormProps> = ({
     },
   });
 
-  const handleSubmit: SubmitHandler<FormFields> = async (values) => {
+  const handleSubmit: SubmitHandler<BidanType> = async (values) => {
     const response = await axios.post(`${APP.API_URL}/bidans`, values);
 
     if (response.status === 201) {

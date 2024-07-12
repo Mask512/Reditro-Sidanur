@@ -1,10 +1,19 @@
 import { useParams } from 'react-router-dom';
 import { BreadCrumb } from '../BreadCrumb';
 import { useEffect, useState } from 'react';
-import { getBidans, getJenisKBs, getPatientById } from '@/utils/api';
+import { getBidans, getJenisImunisasi, getPatientById } from '@/utils/api';
 import { PatientBiodata } from './PatientBiodata';
-import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  BidanType,
+  PatientType,
+  pemeriksaanImunisasiSchema,
+  PemeriksaanImunisasiType,
+} from '@/schema/schema';
+import { Separator } from '@/components/ui/separator';
+import { JenisImunisasiType } from './Master/JenisImunisasi';
+import { useToast } from '../ui/use-toast';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
@@ -20,48 +29,56 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import {
-  BidanType,
-  JenisKBType,
-  PatientType,
-  pemeriksaanKBSchema,
-  PemeriksaanKBType,
-} from '@/schema/schema';
 import axios from 'axios';
-import { useToast } from '../ui/use-toast';
 import { APP } from '@/data/app';
 
 const parentLinks = [
   { href: '/', label: 'Home' },
-  { href: '/nifas', label: 'Keluarga Berencana' },
+  { href: '/nifas', label: 'Form Imunisasi' },
 ];
 
-export const KBForm = () => {
+export const ImunisasiForm = () => {
   const { patientId } = useParams<{ patientId: string }>();
   const [patientData, setPatientData] = useState<PatientType | null>(null);
   const [bidans, setBidans] = useState<BidanType[]>([]);
-  const [jenisKB, setJenisKB] = useState<JenisKBType[]>([]);
+  const [jenisImunisasi, setJenisImunisasi] = useState<JenisImunisasiType[]>(
+    [],
+  );
   const { toast } = useToast();
 
-  const form = useForm<PemeriksaanKBType>({
-    resolver: zodResolver(pemeriksaanKBSchema),
+  const fetchBidans = async () => {
+    const data = await getBidans();
+    if (data) {
+      setBidans(data);
+    }
+  };
+
+  const fetchJenisImunisasi = async () => {
+    const data = await getJenisImunisasi();
+    if (data) {
+      setJenisImunisasi(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchBidans();
+    fetchJenisImunisasi();
+  }, []);
+
+  const form = useForm<PemeriksaanImunisasiType>({
+    resolver: zodResolver(pemeriksaanImunisasiSchema),
     defaultValues: {
-      tanggalKB: String(new Date().toISOString().split('T')[0]),
+      tanggalImunisasi: String(new Date().toISOString().split('T')[0]),
       beratBadan: '',
-      tinggiBadan: '',
-      tanggalKembaliKB: '',
+      panjangBadan: '',
+      tanggalKembaliImunisasi: '',
     },
   });
 
-  const onSubmit = async (values: PemeriksaanKBType) => {
-    const response = await axios.post(
-      `${APP.API_URL}/keluarga-berencanas`,
-      values,
-    );
+  const onSubmit = async (values: PemeriksaanImunisasiType) => {
+    const response = await axios.post(`${APP.API_URL}/imunisasis`, values);
     if (response.status === 201) {
       toast({
         description: 'Sukses. Data telah tersimpan!',
@@ -80,24 +97,6 @@ export const KBForm = () => {
     fetchPatient();
   }, [form, patientId]);
 
-  useEffect(() => {
-    const fetchBidans = async () => {
-      const data = await getBidans();
-      if (data) {
-        setBidans(data);
-      }
-    };
-
-    const fetchJenisKb = async () => {
-      const data = await getJenisKBs();
-      if (data) {
-        setJenisKB(data);
-      }
-    };
-    fetchBidans();
-    fetchJenisKb();
-  }, []);
-
   return (
     <>
       <BreadCrumb
@@ -109,7 +108,7 @@ export const KBForm = () => {
         <PatientBiodata patientData={patientData} />
         <div>
           <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-            KB
+            Imunisasi
           </h4>
           <Separator />
 
@@ -121,10 +120,10 @@ export const KBForm = () => {
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
-                  name="tanggalKB"
+                  name="tanggalImunisasi"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Tanggal KB</FormLabel>
+                      <FormLabel>Tanggal Imunisasi</FormLabel>
                       <FormControl>
                         <Input placeholder="YYYY-MM-DD" {...field} />
                       </FormControl>
@@ -178,10 +177,10 @@ export const KBForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="tinggiBadan"
+                  name="panjangBadan"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Tinggi Badan</FormLabel>
+                      <FormLabel>Panjang Badan</FormLabel>
                       <FormControl>
                         <Input placeholder="cm" {...field} />
                       </FormControl>
@@ -191,13 +190,13 @@ export const KBForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="jenisKB"
+                  name="jenisImunisasi"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Jenis KB</FormLabel>
+                      <FormLabel>Jenis Imunisasi</FormLabel>
                       <Select
                         onValueChange={(value) => {
-                          const selected = jenisKB.find(
+                          const selected = jenisImunisasi.find(
                             (target) => target.id === value,
                           );
                           field.onChange(selected);
@@ -205,11 +204,11 @@ export const KBForm = () => {
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Jenis KB" />
+                            <SelectValue placeholder="Jenis Imunisasi" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {jenisKB.map((val) => (
+                          {jenisImunisasi.map((val) => (
                             <SelectItem key={val.id} value={val.id}>
                               {val.nama}
                             </SelectItem>
@@ -222,7 +221,7 @@ export const KBForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="tanggalKembaliKB"
+                  name="tanggalKembaliImunisasi"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Tanggal Kembali</FormLabel>

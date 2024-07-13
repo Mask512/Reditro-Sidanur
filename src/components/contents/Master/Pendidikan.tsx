@@ -4,7 +4,7 @@ import { DataTable } from '@/components/ui/data-table';
 import { Input } from '@/components/ui/input';
 import { useEffect, useState } from 'react';
 import { pendidikanColumns } from './pendidikanColumn';
-import { addPendidikan, deletePendidikan, getPendidikans } from '@/utils/api';
+import { addPendidikan, deletePendidikan, getPendidikans } from '@/data/api/api';
 
 export type PendidikanType = {
   id: string;

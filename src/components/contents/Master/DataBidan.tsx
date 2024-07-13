@@ -16,7 +16,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { DataBidanForm } from '@/components/DataBidanForm';
-import { getBidans } from '@/utils/api';
+import { getBidans } from '@/data/api/api';
 import { BidanType } from '@/schema/schema';
 
 

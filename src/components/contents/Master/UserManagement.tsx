@@ -2,7 +2,7 @@ import { DataTable } from '@/components/ui/data-table';
 import { useEffect, useState } from 'react';
 import { userColumns } from './userColumns';
 import { BreadCrumb } from '@/components/BreadCrumb';
-import { deleteUser, getUsers, toggleActiveUser } from '@/utils/api';
+import { deleteUser, getUsers, toggleActiveUser } from '@/data/api/api';
 import { AccountType } from '@/schema/schema';
 
 const parentLinks = [{ href: '/master-data', label: 'Master Data' }];

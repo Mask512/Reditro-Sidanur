@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { BreadCrumb } from '../BreadCrumb';
 import { useEffect, useState } from 'react';
-import { getBidans, getJenisKBs, getPatientById } from '@/utils/api';
+import { getBidans, getJenisKBs} from '@/data/api/api';
 import { PatientBiodata } from './PatientBiodata';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -34,6 +34,7 @@ import {
 import axios from 'axios';
 import { useToast } from '../ui/use-toast';
 import { APP } from '@/data/app';
+import { Pasien } from '@/data/api/pasien';
 
 const parentLinks = [
   { href: '/', label: 'Home' },
@@ -72,7 +73,7 @@ export const KBForm = () => {
   useEffect(() => {
     const fetchPatient = async () => {
       if (patientId) {
-        const data = await getPatientById(patientId);
+        const data = await Pasien.getPasienById(patientId);
         setPatientData(data);
         form.setValue('pasien', data);
       }

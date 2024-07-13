@@ -3,7 +3,7 @@ import { PersalinanType } from '@/schema/schema';
 import { BreadCrumb } from '@/components/BreadCrumb';
 import { DataTable } from '@/components/ui/data-table';
 import { riwayatPersalinanColumns } from './riwayatPersalinan-columns';
-import { getRiwayatPersalinan } from '@/utils/api';
+import { getRiwayatPersalinan } from '@/data/api/api';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 

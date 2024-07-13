@@ -4,7 +4,7 @@ import { DataTable } from '@/components/ui/data-table';
 import { Input } from '@/components/ui/input';
 import { useEffect, useState } from 'react';
 import { hubunganColumns } from './hubunganColumns';
-import { addHubungan, deleteHubungan, getHubungans } from '@/utils/api';
+import { addHubungan, deleteHubungan, getHubungans } from '@/data/api/api';
 
 export type HubunganType = {
   id: string;

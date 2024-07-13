@@ -8,7 +8,7 @@ import {
   addGolonganDarah,
   deleteGolonganDarah,
   getGolonganDarahs,
-} from '@/utils/api';
+} from '@/data/api/api';
 import { GolonganDarahType } from '@/schema/schema';
 
 const parentLinks = [{ href: '/master-data', label: 'Master Data' }];

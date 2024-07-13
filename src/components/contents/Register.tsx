@@ -24,19 +24,18 @@ import { Input } from '@/components/ui/input';
 import { useEffect, useState } from 'react';
 import { getLastRMNum } from '@/utils/getRMNumber';
 import {
-  addPatient,
   getGolonganDarahs,
   getHubungans,
   getPekerjaans,
   getPendidikans,
-  getTotalPatients,
-} from '@/utils/api';
+} from '@/data/api/api';
 import { toast } from '@/components/ui/use-toast';
 
 import { PendidikanType } from './Master/Pendidikan';
 import { PekerjaanType } from './Master/Pekerjaan';
 import { HubunganType } from './Master/Hubungan';
 import { GolonganDarahType, patientSchema, PatientType } from '@/schema/schema';
+import { Pasien } from '@/data/api/pasien';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
@@ -64,7 +63,7 @@ export const Register = () => {
 
   useEffect(() => {
     const getLastRM = async () => {
-      const data = await getTotalPatients();
+      const data = await Pasien.getTotalPasien();
       if (data) {
         const rmNumber = getLastRMNum(data);
         setLastRMNumber(rmNumber);
@@ -110,7 +109,7 @@ export const Register = () => {
   }, []);
 
   const onSubmit = async (values: z.infer<typeof patientSchema>) => {
-    const response = await addPatient(values);
+    const response = await Pasien.addPasien(values);
 
     if (response.status === 201) {
       form.reset();
@@ -120,7 +119,7 @@ export const Register = () => {
         description: 'Pasien berhasil ditambahkan',
       });
 
-      const data = await getTotalPatients();
+      const data = await Pasien.getTotalPasien();
       if (data) {
         const rmNumber = getLastRMNum(data);
         setLastRMNumber(rmNumber);

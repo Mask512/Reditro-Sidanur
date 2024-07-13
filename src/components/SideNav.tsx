@@ -5,14 +5,14 @@ import { menus } from '@/data/menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminLogin, RootState } from '@/store/store';
 import { useEffect } from 'react';
-import { getAccount } from '@/utils/api';
-import { authority } from '@/schema/schema';
+import { getAccount } from '@/data/api/api';
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
 } from '@/components/ui/accordion';
+import { Authority } from '@/schema/schema';
 
 export const SideNav = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export const SideNav = () => {
     const fetchAuthorities = async () => {
       try {
         const data = await getAccount();
-        let roles: authority[];
+        let roles: Authority[];
         if (data && data.authorities) {
           roles = data.authorities;
           const isAdmin = roles.find((role) => role === 'ROLE_ADMIN');

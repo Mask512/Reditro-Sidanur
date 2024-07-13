@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getRiwayatNifas } from '@/utils/api';
+import { getRiwayatNifas } from '@/data/api/api';
 import {  PemeriksaanNifasType } from '@/schema/schema';
 import { BreadCrumb } from '@/components/BreadCrumb';
 import { DataTable } from '@/components/ui/data-table';

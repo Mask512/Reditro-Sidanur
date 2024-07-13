@@ -56,7 +56,7 @@ export const patientSchema = z.object({
   alamat: z.string().min(1, 'Required'),
   jenisKelamin: z.enum(['PRIA', 'WANITA']),
   noTelp: z.string().min(1, 'Required'),
-  noTelpDarurat: z.string().optional(),
+  noTelpDarurat: z.string(),
   golonganDarah: z.optional(golonganDarahScheme),
   pendidikan: z.optional(pendidikanScheme),
   pekerjaan: z.optional(pekerjaanScheme),

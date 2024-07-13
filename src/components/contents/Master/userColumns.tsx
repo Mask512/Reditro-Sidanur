@@ -3,7 +3,7 @@ import { ArrowUpDown, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ConfirmAlert } from '@/components/ConfirmAlert';
-import { AccountType, authority } from '@/schema/schema';
+import { AccountType, Authority } from '@/schema/schema';
 
 export const userColumns = (
   handleDelete: (login: string) => void,
@@ -45,7 +45,7 @@ export const userColumns = (
     accessorKey: 'authorities',
     header: 'Role',
     cell: ({ row }) => {
-      const authorities = row.getValue('authorities') as authority[];
+      const authorities = row.getValue('authorities') as Authority[];
       const isAdmin = authorities.some(
         (authority) => authority === 'ROLE_ADMIN',
       );

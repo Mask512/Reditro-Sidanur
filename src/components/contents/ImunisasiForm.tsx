@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { BreadCrumb } from '../BreadCrumb';
 import { useEffect, useState } from 'react';
-import { getBidans, getJenisImunisasi, getPatientById } from '@/utils/api';
+import { getBidans, getJenisImunisasi } from '@/data/api/api';
 import { PatientBiodata } from './PatientBiodata';
 import {
   BidanType,
@@ -33,6 +33,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
 import { APP } from '@/data/app';
+import { Pasien } from '@/data/api/pasien';
 
 const parentLinks = [
   { href: '/', label: 'Home' },
@@ -89,7 +90,7 @@ export const ImunisasiForm = () => {
   useEffect(() => {
     const fetchPatient = async () => {
       if (patientId) {
-        const data = await getPatientById(patientId);
+        const data = await Pasien.getPasienById(patientId);
         setPatientData(data);
         form.setValue('pasien', data);
       }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getRiwayatKehamilan } from '@/utils/api';
+import { getRiwayatKehamilan } from '@/data/api/api';
 import {  PemeriksaanKehamilanType } from '@/schema/schema';
 import { BreadCrumb } from '@/components/BreadCrumb';
 import { DataTable } from '@/components/ui/data-table';

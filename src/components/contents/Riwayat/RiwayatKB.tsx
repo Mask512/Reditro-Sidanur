@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getRiwayatKB } from '@/utils/api';
+import { getRiwayatKB } from '@/data/api/api';
 import { riwayatKBColumns } from './riwayatKB-columns';
 import { PemeriksaanKBType } from '@/schema/schema';
 import { BreadCrumb } from '@/components/BreadCrumb';

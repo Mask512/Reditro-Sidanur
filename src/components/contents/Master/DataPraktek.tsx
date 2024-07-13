@@ -2,7 +2,7 @@ import { BreadCrumb } from '@/components/BreadCrumb';
 import { DataTable } from '@/components/ui/data-table';
 import { useEffect, useState } from 'react';
 import { dataPraktekColumns } from './dataPraktekColumns';
-import { getDataPraktek, updateDataPraktek } from '@/utils/api';
+import { getDataPraktek, updateDataPraktek } from '@/data/api/api';
 import { LokasiPraktekType } from '@/schema/schema';
 
 const parentLinks = [{ href: '/master-data', label: 'Master Data' }];

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { BreadCrumb } from '../BreadCrumb';
 import { useEffect, useState } from 'react';
-import { getBidans, getGolonganDarahs, getPatientById } from '@/utils/api';
+import { getBidans, getGolonganDarahs } from '@/data/api/api';
 import { PatientBiodata } from './PatientBiodata';
 import {
   BidanType,
@@ -33,6 +33,7 @@ import {
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Pasien } from '@/data/api/pasien';
 
 const parentLinks = [
   { href: '/', label: 'Home' },
@@ -86,7 +87,7 @@ export const PersalinanForm = () => {
   useEffect(() => {
     const fetchPatient = async () => {
       if (patientId) {
-        const data = await getPatientById(patientId);
+        const data = await Pasien.getPasienById(patientId);
         setPatientData(data);
         form.setValue('pasien', data);
       }

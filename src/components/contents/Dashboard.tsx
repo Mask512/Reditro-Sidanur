@@ -12,6 +12,7 @@ import { BreadCrumb } from '../BreadCrumb';
 import { useEffect, useState } from 'react';
 import { DashboardCard } from '../DashboardCard';
 import { fetchDashboardData } from '@/data/api/api';
+import { ChartPendidikan } from '../ChartPendidikan';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
@@ -85,6 +86,8 @@ export const Dashboard = () => {
           info="terlayani"
           icon={<Icon icon={Syringe} />}
         />
+        <div ></div>
+      <ChartPendidikan />
       </div>
     </>
   );

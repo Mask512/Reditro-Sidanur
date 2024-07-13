@@ -109,8 +109,8 @@ export const Register = () => {
   }, []);
 
   const onSubmit = async (values: z.infer<typeof patientSchema>) => {
+    
     const response = await Pasien.addPasien(values);
-
     if (response.status === 201) {
       form.reset();
 
@@ -118,13 +118,6 @@ export const Register = () => {
         title: 'Sukses!',
         description: 'Pasien berhasil ditambahkan',
       });
-
-      const data = await Pasien.getTotalPasien();
-      if (data) {
-        const rmNumber = getLastRMNum(data);
-        setLastRMNumber(rmNumber);
-        form.setValue('nomorPasien', rmNumber);
-      }
     }
   };
 

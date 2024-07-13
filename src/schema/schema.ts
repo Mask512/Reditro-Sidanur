@@ -58,7 +58,7 @@ export const patientSchema = z.object({
   noTelp: z.string().min(1, 'Required'),
   noTelpDarurat: z.string(),
   golonganDarah: z.optional(golonganDarahScheme),
-  pendidikan: z.optional(pendidikanScheme),
+  pendidikan: pendidikanScheme,
   pekerjaan: z.optional(pekerjaanScheme),
   namaPenanggungJawab: z.string(),
   hubunganPenanggungJawab: z.optional(hubunganScheme),

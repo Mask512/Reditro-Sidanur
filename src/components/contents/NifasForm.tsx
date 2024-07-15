@@ -125,7 +125,7 @@ export const NifasForm = () => {
                 name="tanggalPemeriksaan"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Tanggal KB</FormLabel>
+                    <FormLabel>Tanggal Pemeriksaan</FormLabel>
                     <FormControl>
                       <Input placeholder="YYYY-MM-DD" {...field} />
                     </FormControl>

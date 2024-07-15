@@ -36,6 +36,7 @@ import { PekerjaanType } from './Master/Pekerjaan';
 import { HubunganType } from './Master/Hubungan';
 import { GolonganDarahType, patientSchema, PatientType } from '@/schema/schema';
 import { Pasien } from '@/data/api/pasien';
+import { AxiosError } from 'axios';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
@@ -109,15 +110,27 @@ export const Register = () => {
   }, []);
 
   const onSubmit = async (values: z.infer<typeof patientSchema>) => {
-    
-    const response = await Pasien.addPasien(values);
-    if (response.status === 201) {
-      form.reset();
+    try {
+      const response = await Pasien.addPasien(values);
+      console.log(response);
 
-      toast({
-        title: 'Sukses!',
-        description: 'Pasien berhasil ditambahkan',
-      });
+      if (response.status === 201) {
+        form.reset();
+
+        toast({
+          title: 'Sukses!',
+          description: 'Pasien berhasil ditambahkan',
+        });
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      if( err && err.request?.status) {
+        toast({
+          title: 'Gagal',
+          variant: 'destructive',
+          description: 'Pasien gagal ditambahkan, NIK Sudah terdaftar / Data salah',
+        });
+      }
     }
   };
 

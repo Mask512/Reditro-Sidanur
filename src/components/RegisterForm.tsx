@@ -8,7 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from '@/components/ui/use-toast';
 import { ArrowLeft } from 'lucide-react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -83,14 +83,17 @@ export const RegisterForm = ({ setIsRegister }: RegisterFormProps) => {
     };
 
     try {
-      const response = await axios.post(`${APP.API_URL}/register`, data)
+      const response = await axios.post(`${APP.API_URL}/register`, data);
       if (response.status === 201) {
-        toast({description: 'Registration successful'});
+        toast({
+          title: 'Registrasi Berhasil.',
+          description:
+            'Silahkan cek email atau hubungi administrator untuk aktivasi',
+        });
         form.reset();
       }
-      
     } catch (error) {
-      toast({description: 'Registration failed'});
+      toast({ description: 'Registration failed' });
     }
   };
 
@@ -189,7 +192,11 @@ export const RegisterForm = ({ setIsRegister }: RegisterFormProps) => {
           </Button>
         </form>
       </Form>
-      <Button onClick={() => setIsRegister(false)} variant="link" className='ml-auto'>
+      <Button
+        onClick={() => setIsRegister(false)}
+        variant="link"
+        className="ml-auto"
+      >
         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Login
       </Button>
     </>

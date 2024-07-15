@@ -103,9 +103,8 @@ export const KehamilanForm = () => {
   }, [patientId, form]);
 
   const onSubmit = async (values: PemeriksaanKehamilanType) => {
-    console.log(values);
     const response = await axios.post(
-      `${APP.API_URL}/pemeriksaan-nifas`,
+      `${APP.API_URL}/pemeriksaan-kehamilans`,
       values,
     );
 

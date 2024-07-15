@@ -57,7 +57,7 @@ export const patientSchema = z.object({
   jenisKelamin: z.enum(['PRIA', 'WANITA']),
   noTelp: z.string().min(1, 'Required'),
   noTelpDarurat: z.string(),
-  golonganDarah: z.optional(golonganDarahScheme),
+  golonganDarah: golonganDarahScheme,
   pendidikan: pendidikanScheme,
   pekerjaan: z.optional(pekerjaanScheme),
   namaPenanggungJawab: z.string(),
@@ -76,7 +76,7 @@ export const lokasiPraktekSchema = z.object({
 });
 
 export const userSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   login: z.string(),
 });
 
@@ -91,12 +91,12 @@ export const bidanSchema = z.object({
   jenisKelamin: z.enum(['PRIA', 'WANITA']),
   jabatan: z.string(),
   lokasiPraktek: lokasiPraktekSchema,
-  user: z.optional(userSchema).nullable(),
-  pemeriksaanKehamilans: z.string().nullable(),
-  keluargaBerencanas: z.string().nullable(),
-  imunisasis: z.string().nullable(),
-  persalinans: z.string().nullable(),
-  pemeriksaanNifas: z.string().nullable(),
+  user: userSchema,
+  pemeriksaanKehamilans: z.string().optional().nullable(),
+  keluargaBerencanas: z.string().optional().nullable(),
+  imunisasis: z.string().optional().nullable(),
+  persalinans: z.string().optional().nullable(),
+  pemeriksaanNifas: z.string().optional().nullable(),
 });
 
 export const pemeriksaanKBSchema = z.object({

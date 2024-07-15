@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { DashboardCard } from '../DashboardCard';
 import { fetchDashboardData } from '@/data/api/api';
 import { ChartPendidikan } from '../ChartPendidikan';
+import { ChartGolonganDarah } from '../ChartGolonganDarah';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
@@ -88,6 +89,7 @@ export const Dashboard = () => {
         />
         <div ></div>
       <ChartPendidikan />
+      <ChartGolonganDarah />
       </div>
     </>
   );

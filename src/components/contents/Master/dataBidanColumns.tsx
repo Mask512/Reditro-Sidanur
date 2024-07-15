@@ -34,7 +34,7 @@ export const dataBidanColumns = (
   {
     accessorKey: 'user',
     header: 'Account',
-    cell: ({row}) => row.original.user ? row.original.user : 'Not Linked' 
+    cell: ({row}) => row.original.user ? row.original.user.login : 'Not Linked' 
   },
   {
     id: 'action',

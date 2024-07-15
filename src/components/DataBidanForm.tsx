@@ -18,12 +18,17 @@ import {
 import { toast } from '@/components/ui/use-toast';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { DialogFooter } from './ui/dialog';
 import axios from 'axios';
 import { APP } from '@/data/app';
 import { useEffect, useState } from 'react';
-import { bidanSchema, BidanType, LokasiPraktekType, UserType } from '@/schema/schema';
+import {
+  bidanSchema,
+  BidanType,
+  LokasiPraktekType,
+  UserType,
+} from '@/schema/schema';
 
 interface DataBidanFormProps {
   onSubmitSuccess?: () => void;
@@ -66,6 +71,7 @@ export const DataBidanForm: React.FC<DataBidanFormProps> = ({
   const form = useForm<BidanType>({
     resolver: zodResolver(bidanSchema),
     defaultValues: {
+      id: '',
       alamat: '',
       jabatan: '',
       nama: '',
@@ -77,7 +83,7 @@ export const DataBidanForm: React.FC<DataBidanFormProps> = ({
     },
   });
 
-  const handleSubmit: SubmitHandler<BidanType> = async (values) => {
+  const handleSubmit = async (values: BidanType) => {
     const response = await axios.post(`${APP.API_URL}/bidans`, values);
 
     if (response.status === 201) {

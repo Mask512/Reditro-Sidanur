@@ -91,7 +91,7 @@ export const bidanSchema = z.object({
   jenisKelamin: z.enum(['PRIA', 'WANITA']),
   jabatan: z.string(),
   lokasiPraktek: lokasiPraktekSchema,
-  user: userSchema,
+  user: userSchema.nullable(),
   pemeriksaanKehamilans: z.string().optional().nullable(),
   keluargaBerencanas: z.string().optional().nullable(),
   imunisasis: z.string().optional().nullable(),

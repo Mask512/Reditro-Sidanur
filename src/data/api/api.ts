@@ -148,34 +148,6 @@ export const deleteJenisKB = async (id: string) => {
   await axios.delete(`${apiBaseUrl}/jenis-kbs/${id}`);
 };
 
-// pasien
-
-// export const getTotalPatients = async () => {
-//   const { data } = await axios.get(`${apiBaseUrl}/pasiens/count`);
-//   if (data) {
-//     return data;
-//   }
-// };
-
-// export const getPatients = async () => {
-//   const { data } = await axios.get(`${apiBaseUrl}/pasiens`);
-//   if (data) {
-//     return data;
-//   }
-// };
-
-// export const getPatientById = async (id: string) => {
-//   const { data } = await axios.get(`${apiBaseUrl}/pasiens/${id}`);
-//   if (data) {
-//     return data;
-//   }
-// };
-
-// export const addPatient = async (values: PatientType) => {
-//   const response = await axios.post(`${apiBaseUrl}/pasiens`, values);
-//   return response;
-// };
-
 // bidan 
 
 export const getBidans = async () => {

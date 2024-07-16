@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { PemeriksaanKehamilanType } from '@/schema/schema';
+import { formatDateID } from '@/utils/formatter';
 import { ColumnDef } from '@tanstack/react-table';
 
 export const riwayatKehamilanColumns = (): ColumnDef<PemeriksaanKehamilanType>[] => [
@@ -26,6 +27,7 @@ export const riwayatKehamilanColumns = (): ColumnDef<PemeriksaanKehamilanType>[]
   {
     accessorKey: 'riwayatKehamilanHPHT',
     header: 'Tanggal HPHT',
+    cell: (info) => formatDateID(info.getValue() as string),
   },
   {
     accessorKey: 'pemeriksaanUsiaKehamilan',
@@ -38,6 +40,7 @@ export const riwayatKehamilanColumns = (): ColumnDef<PemeriksaanKehamilanType>[]
   {
     accessorKey: 'riwayatKehamilanTPorHPL',
     header: 'HPL',
+    cell: (info) => formatDateID(info.getValue() as string),
   },
   {
     accessorKey: 'bidan',

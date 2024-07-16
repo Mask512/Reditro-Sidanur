@@ -1,11 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { PemeriksaanNifasType } from '@/schema/schema';
+import { formatDateID } from '@/utils/formatter';
 import { ColumnDef } from '@tanstack/react-table';
 
 export const riwayatNifasColumns = (): ColumnDef<PemeriksaanNifasType>[] => [
   {
     accessorKey: 'tanggalPemeriksaan',
     header: 'Tanggal Pemeriksaan',
+    cell: (info) => formatDateID(info.getValue() as string),
   },
   {
     id: 'Nomor RM',

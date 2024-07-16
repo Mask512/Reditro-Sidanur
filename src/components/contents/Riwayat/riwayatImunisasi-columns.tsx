@@ -1,4 +1,5 @@
 import { PemeriksaanImunisasiType } from '@/schema/schema';
+import { formatDateID } from '@/utils/formatter';
 import { ColumnDef } from '@tanstack/react-table';
 
 export const riwayatImunisasiColumns = (): ColumnDef<PemeriksaanImunisasiType>[] => [
@@ -7,13 +8,13 @@ export const riwayatImunisasiColumns = (): ColumnDef<PemeriksaanImunisasiType>[]
     header: 'Pasien',
     cell: ({ row }) => {
       const pasien = row.original.pasien;
-      // needFix
       return pasien.nama;
     },
   },
   {
     accessorKey: 'tanggalImunisasi',
     header: 'Tanggal Imunisasi',
+    cell: (info) => formatDateID(info.getValue() as string),
   },
   {
     accessorKey: 'jenisImunisasi',
@@ -26,6 +27,7 @@ export const riwayatImunisasiColumns = (): ColumnDef<PemeriksaanImunisasiType>[]
   {
     accessorKey: 'tanggalKembaliImunisasi',
     header: 'Tanggal Kembali',
+    cell: (info) => formatDateID(info.getValue() as string),
   },
   {
     accessorKey: 'bidan',

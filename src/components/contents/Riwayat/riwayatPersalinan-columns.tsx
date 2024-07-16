@@ -1,11 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { PersalinanType } from '@/schema/schema';
+import { formatDateID } from '@/utils/formatter';
 import { ColumnDef } from '@tanstack/react-table';
 
 export const riwayatPersalinanColumns = (): ColumnDef<PersalinanType>[] => [
   {
     accessorKey: 'tanggalPersalinan',
     header: 'Tanggal Persalinan',
+    cell: (info) => formatDateID(info.getValue() as string),
   },
   {
     accessorKey: 'jamPersalinan',

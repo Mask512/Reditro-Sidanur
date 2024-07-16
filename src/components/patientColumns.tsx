@@ -1,20 +1,23 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Button } from './ui/button';
-import { Link } from 'react-router-dom';
 import { PatientType } from '@/schema/schema';
 import { ArrowUpDown } from 'lucide-react';
 import { formatDateID } from '@/utils/formatter';
+import React from 'react';
 
-export const patientColumns = (
-  action: (id: string) => string,
-): ColumnDef<PatientType>[] => [
+
+interface PatientColumnsProps {
+  action: (id: string) => React.ReactNode; 
+}
+
+export const patientColumns = ({action}: PatientColumnsProps): ColumnDef<PatientType>[] => [
   {
     accessorKey: 'nomorPasien',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          className='p-0'
+          className="p-0"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           NOMOR RM <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -68,15 +71,6 @@ export const patientColumns = (
 
   {
     id: 'action',
-    cell: ({ row }) => {
-      const { id } = row.original;
-      if (id) {
-        return (
-          <Button>
-            <Link to={action(id)}>Periksa</Link>
-          </Button>
-        );
-      }
-    },
+    cell: ({ row }) =>  action(row.original.id || ''),
   },
 ];

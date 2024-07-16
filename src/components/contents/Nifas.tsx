@@ -1,13 +1,17 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { BreadCrumb } from '../BreadCrumb';
 import { PatientTable } from '../PatientTable';
 import { NifasForm } from './NifasForm';
+import { Button } from '@/components/ui/button';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
 export const Nifas = () => {
+  const navigate = useNavigate();
   const handleAction = (id: string) => {
-    return `/nifas/${id}`;
+    return (
+      <Button onClick={() => navigate(`/nifas/${id}`)}>Periksa</Button>
+    );
   };
   return (
     <>
@@ -24,8 +28,7 @@ export const Nifas = () => {
             </>
           }
         />
-        <Route path='/:patientId' element={<NifasForm/>}>
-        </Route>
+        <Route path="/:patientId" element={<NifasForm />}></Route>
       </Routes>
     </>
   );

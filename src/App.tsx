@@ -24,6 +24,7 @@ import { RiwayatNifas } from './components/contents/Riwayat/RiwayatNifas';
 import { RiwayatKehamilan } from './components/contents/Riwayat/RiwayatKehamilan';
 import { RiwayatPersalinan } from './components/contents/Riwayat/RiwayatPersalinan';
 import { Activate } from './pages/Activate';
+import { DataPasien } from './components/contents/DataPasien';
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -83,6 +84,7 @@ function App() {
                   element={<RiwayatImunisasi />}
                 />
                 <Route path="/reminder" element={<Pengingat />} />
+                <Route path="/data-pasien/*" element={<DataPasien />} />
                 <Route path="/master-data/*" element={<Master />} />
                 <Route path="*" element={<Dashboard />} />
               </Routes>

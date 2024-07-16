@@ -1,13 +1,18 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { BreadCrumb } from '../BreadCrumb';
 import { PatientTable } from '../PatientTable';
 import { KBForm } from './KBForm';
+import { Button } from '../ui/button';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
 export const KB = () => {
+  const navigate = useNavigate();
+  
   const handleAction = (id: string) => {
-    return `/kb/${id}`;
+    return (
+      <Button onClick={() => navigate(`/kb/${id}`)}>Periksa</Button>
+    );
   };
   return (
     <>

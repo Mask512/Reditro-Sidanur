@@ -1,13 +1,18 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { BreadCrumb } from '../BreadCrumb';
 import { PatientTable } from '../PatientTable';
 import { KehamilanForm } from './KehamilanForm';
+import { Button } from '../ui/button';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
 export const Kehamilan = () => {
+  const navigate = useNavigate();
+  
   const handleAction = (id: string) => {
-    return `/kehamilan/${id}`;
+    return (
+      <Button onClick={() => navigate(`/kehamilan/${id}`)}>Periksa</Button>
+    );
   };
   return (
     <>
@@ -24,8 +29,7 @@ export const Kehamilan = () => {
             </>
           }
         />
-        <Route path='/:patientId' element={<KehamilanForm/>}>
-        </Route>
+        <Route path="/:patientId" element={<KehamilanForm />}></Route>
       </Routes>
     </>
   );

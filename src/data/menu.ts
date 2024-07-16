@@ -11,6 +11,7 @@ import {
   Syringe,
   BellRing,
   Database,
+  Users,
 } from 'lucide-react';
 
 export const menus = [
@@ -96,6 +97,11 @@ export const menus = [
     link: '/reminder',
     name: 'Pengingat Pasien',
     icon: BellRing,
+  },
+  {
+    link: '/data-pasien',
+    name: 'Data Pasien',
+    icon: Users,
   },
   {
     link: '/master-data',

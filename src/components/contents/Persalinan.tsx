@@ -1,13 +1,18 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { BreadCrumb } from '../BreadCrumb';
 import { PatientTable } from '../PatientTable';
 import { PersalinanForm } from './PersalinanForm';
+import { Button } from '../ui/button';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
 export const Persalinan = () => {
+  const navigate = useNavigate();
+
   const handleAction = (id: string) => {
-    return `/persalinan/${id}`;
+    return (
+      <Button onClick={() => navigate(`/persalinan/${id}`)}>Periksa</Button>
+    );
   };
   return (
     <>
@@ -16,16 +21,12 @@ export const Persalinan = () => {
           path="/"
           element={
             <>
-              <BreadCrumb
-                pageName="Persalinan"
-                parentLinks={parentLinks}
-              />
+              <BreadCrumb pageName="Persalinan" parentLinks={parentLinks} />
               <PatientTable action={handleAction} />
             </>
           }
         />
-        <Route path='/:patientId' element={<PersalinanForm/>}>
-        </Route>
+        <Route path="/:patientId" element={<PersalinanForm />}></Route>
       </Routes>
     </>
   );

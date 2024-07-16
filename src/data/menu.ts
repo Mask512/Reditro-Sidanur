@@ -93,8 +93,8 @@ export const menus = [
     ],
   },
   {
-    link: '/reminder-kb',
-    name: 'Pengingat KB',
+    link: '/reminder',
+    name: 'Pengingat Pasien',
     icon: BellRing,
   },
   {

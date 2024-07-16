@@ -2,6 +2,7 @@ import {
   ColumnDef,
   ColumnFiltersState,
   SortingState,
+  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -9,6 +10,13 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 import {
   Table,
@@ -35,6 +43,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
   const table = useReactTable({
     data,
@@ -45,27 +54,30 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
     state: {
       sorting,
       columnFilters,
+      columnVisibility,
     },
   });
 
   const renderFilter = () => {
     if (filterColumns) {
       return (
-        <div className="flex items-center ">
-          <Input
-            placeholder={filterColumns.placeholder}
-            value={
-              (table.getColumn(filterColumns.key)?.getFilterValue() as string) ?? ''
-            }
-            onChange={(event) =>
-              table.getColumn(filterColumns.key)?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
-        </div>
+        <Input
+          placeholder={filterColumns.placeholder}
+          value={
+            (table.getColumn(filterColumns.key)?.getFilterValue() as string) ??
+            ''
+          }
+          onChange={(event) =>
+            table
+              .getColumn(filterColumns.key)
+              ?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
       );
     }
   };
@@ -73,8 +85,36 @@ export function DataTable<TData, TValue>({
   return (
     <>
       {/* filtering */}
-      {renderFilter()}
+      <div className="flex items-center pt-4">
+        {renderFilter()}
 
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="ml-auto">
+              Kolom
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

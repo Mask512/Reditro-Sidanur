@@ -82,7 +82,7 @@ function App() {
                   path="/riwayat-imunisasi"
                   element={<RiwayatImunisasi />}
                 />
-                <Route path="/reminder-kb" element={<Pengingat />} />
+                <Route path="/reminder" element={<Pengingat />} />
                 <Route path="/master-data/*" element={<Master />} />
                 <Route path="*" element={<Dashboard />} />
               </Routes>

@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
 import { PatientType } from '@/schema/schema';
 import { ArrowUpDown } from 'lucide-react';
+import { formatDateID } from '@/utils/formatter';
 
 export const patientColumns = (
   action: (id: string) => string,
@@ -13,9 +14,10 @@ export const patientColumns = (
       return (
         <Button
           variant="ghost"
+          className='p-0'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Nomor RM <ArrowUpDown className="ml-2 h-4 w-4" />
+          NOMOR RM <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
@@ -39,6 +41,7 @@ export const patientColumns = (
   {
     accessorKey: 'tanggalLahir',
     header: 'Tanggal Lahir',
+    cell: (info) => formatDateID(info.getValue() as string),
   },
   {
     accessorKey: 'noTelp',

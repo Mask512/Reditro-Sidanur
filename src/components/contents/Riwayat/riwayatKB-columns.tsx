@@ -8,7 +8,6 @@ export const riwayatKBColumns = (): ColumnDef<PemeriksaanKBType>[] => [
     header: 'Pasien',
     cell: ({ row }) => {
       const pasien = row.original.pasien;
-      // needFix
       return pasien.nama;
     },
   },

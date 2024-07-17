@@ -82,7 +82,7 @@ export const formatDataToTable = (data: PemeriksaanType[]) => {
     formattedData.push(row);
   });
 
-  // Sortir berdasarkan tanggal pemeriksaan terdekat ke terlama
+  // Sortir berdasarkan tanggal pemeriksaan terdekat ke hari ini ke terlama
   formattedData.sort((a, b) => {
     const dateA = a['Tanggal Pemeriksaan']
       ? new Date(a['Tanggal Pemeriksaan'])

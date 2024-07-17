@@ -26,7 +26,13 @@ export const pengingatColumns = (): ColumnDef<FormattedDataRow>[] => [
 
       if (date) {
         const daysLeft = daysUntil(date);
-        return daysLeft == 0 ? (<Badge>Hari ini</Badge>) : `${daysLeft} hari lagi`;
+        return daysLeft == 0 ? (
+          <Badge>Hari ini</Badge>
+        ) : daysLeft <= 0 ? (
+          'Baru saja'
+        ) : (
+          `${daysLeft} hari lagi`
+        );
       }
       return '';
     },

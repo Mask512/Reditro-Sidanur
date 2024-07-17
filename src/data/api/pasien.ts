@@ -20,7 +20,17 @@ export const Pasien = {
   },
 
   async addPasien(values: PatientType) {
-    const response = await axios.post(`${apiBaseUrl}/pasiens`, values);
-    return response.data;
+    const data = await axios.post(`${apiBaseUrl}/pasiens`, values);
+    return data;
+  },
+
+  async updatePasien(id: string, values: PatientType) {
+    const response = await axios.put(`${apiBaseUrl}/pasiens/${id}`, values);
+    return response;
+  },
+
+  async deletePasien(id: string) {
+    const response = await axios.delete(`${apiBaseUrl}/pasiens/${id}`);
+    return response;
   }
 };

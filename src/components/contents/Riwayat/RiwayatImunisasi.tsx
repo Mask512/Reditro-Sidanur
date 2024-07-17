@@ -8,7 +8,9 @@ import { riwayatImunisasiColumns } from './riwayatImunisasi-columns';
 const parentLinks = [{ href: '/', label: 'Home' }];
 
 export const RiwayatImunisasi = () => {
-  const [riwayatImunisasi, setRiwayatImunisasi] = useState<PemeriksaanImunisasiType[]>([]);
+  const [riwayatImunisasi, setRiwayatImunisasi] = useState<
+    PemeriksaanImunisasiType[]
+  >([]);
 
   useEffect(() => {
     const fetchRiwayatKB = async () => {
@@ -22,7 +24,17 @@ export const RiwayatImunisasi = () => {
   return (
     <>
       <BreadCrumb pageName="Riwayat Imunisasi" parentLinks={parentLinks} />
-      <DataTable columns={riwayatImunisasiColumns()} data={riwayatImunisasi} />
+      <h2 className="mt-4 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+        Riwayat Imunisasi
+      </h2>
+      <DataTable
+        columns={riwayatImunisasiColumns()}
+        data={riwayatImunisasi}
+        filterColumns={{
+          key: 'pasien',
+          placeholder: 'Cari Nama ...',
+        }}
+      />
     </>
   );
 };

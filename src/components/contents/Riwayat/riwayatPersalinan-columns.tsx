@@ -5,15 +5,6 @@ import { ColumnDef } from '@tanstack/react-table';
 
 export const riwayatPersalinanColumns = (): ColumnDef<PersalinanType>[] => [
   {
-    accessorKey: 'tanggalPersalinan',
-    header: 'Tanggal Persalinan',
-    cell: (info) => formatDateID(info.getValue() as string),
-  },
-  {
-    accessorKey: 'jamPersalinan',
-    header: 'Waktu Persalinan',
-  },
-  {
     id: 'Nomor RM',
     header: 'Nomor RM',
     cell: ({ row }) => {
@@ -22,12 +13,18 @@ export const riwayatPersalinanColumns = (): ColumnDef<PersalinanType>[] => [
     },
   },
   {
-    accessorKey: 'pasien',
+    id: 'pasien',
+    accessorFn: (row) => row.pasien.nama,
     header: 'Pasien',
-    cell: ({ row }) => {
-      const pasien = row.original.pasien;
-      return pasien.nama;
-    },
+  },
+  {
+    accessorKey: 'tanggalPersalinan',
+    header: 'Tanggal Persalinan',
+    cell: (info) => formatDateID(info.getValue() as string),
+  },
+  {
+    accessorKey: 'jamPersalinan',
+    header: 'Waktu Persalinan',
   },
   {
     accessorKey: 'keadaanIbu',

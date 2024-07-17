@@ -5,11 +5,6 @@ import { ColumnDef } from '@tanstack/react-table';
 
 export const riwayatNifasColumns = (): ColumnDef<PemeriksaanNifasType>[] => [
   {
-    accessorKey: 'tanggalPemeriksaan',
-    header: 'Tanggal Pemeriksaan',
-    cell: (info) => formatDateID(info.getValue() as string),
-  },
-  {
     id: 'Nomor RM',
     header: 'Nomor RM',
     cell: ({ row }) => {
@@ -18,12 +13,14 @@ export const riwayatNifasColumns = (): ColumnDef<PemeriksaanNifasType>[] => [
     },
   },
   {
-    accessorKey: 'pasien',
+    id: 'pasien',
+    accessorFn: (row) => row.pasien.nama,
     header: 'Pasien',
-    cell: ({ row }) => {
-      const pasien = row.original.pasien;
-      return pasien.nama;
-    },
+  },
+  {
+    accessorKey: 'tanggalPemeriksaan',
+    header: 'Tanggal Pemeriksaan',
+    cell: (info) => formatDateID(info.getValue() as string),
   },
   {
     accessorKey: 'hariKe',
@@ -57,9 +54,7 @@ export const riwayatNifasColumns = (): ColumnDef<PemeriksaanNifasType>[] => [
     id: 'action',
     cell: ({ row }) => {
       const id = row.original.pasien.id;
-      return (
-        <Button onClick={()=> alert(id)}>Detail</Button>
-      );
+      return <Button onClick={() => alert(id)}>Detail</Button>;
     },
   },
 ];

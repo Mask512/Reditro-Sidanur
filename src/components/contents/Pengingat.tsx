@@ -61,8 +61,17 @@ export const Pengingat = () => {
   return (
     <>
       <BreadCrumb pageName="Pengingat Pasien" parentLinks={parentLinks} />
-
-      <DataTable columns={pengingatColumns()} data={reminderData} />
+      <h2 className="mt-4 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+        Pengingat
+      </h2>
+      <DataTable
+        columns={pengingatColumns()}
+        data={reminderData}
+        filterColumns={{
+          key: 'Nama Pasien',
+          placeholder: 'Cari Nama ...',
+        }}
+      />
     </>
   );
 };

@@ -91,7 +91,7 @@ export function DataTable<TData, TValue>({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Kolom
+              Sembunyikan Kolom
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

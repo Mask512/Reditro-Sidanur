@@ -4,12 +4,9 @@ import { ColumnDef } from '@tanstack/react-table';
 
 export const riwayatKBColumns = (): ColumnDef<PemeriksaanKBType>[] => [
   {
-    accessorKey: 'pasien',
+    id: 'pasien',
+    accessorFn: (row) => row.pasien.nama,
     header: 'Pasien',
-    cell: ({ row }) => {
-      const pasien = row.original.pasien;
-      return pasien.nama;
-    },
   },
   {
     accessorKey: 'tanggalKB',

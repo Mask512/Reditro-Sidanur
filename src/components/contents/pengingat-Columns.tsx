@@ -9,7 +9,7 @@ const sendWhatsAppMessage = (nomorTelepon: string, isiPesan: string) => {
   const noHp = formatPhoneNumber(nomorTelepon);
   const encodedMessage = encodeURIComponent(isiPesan);
   const whatsappUrl = `https://wa.me/${noHp}?text=${encodedMessage}`;
-  window.location.href = whatsappUrl;
+  window.open(whatsappUrl, '_blank');
 };
 
 export const pengingatColumns = (): ColumnDef<FormattedDataRow>[] => [
@@ -62,7 +62,7 @@ export const pengingatColumns = (): ColumnDef<FormattedDataRow>[] => [
     cell: ({ row }) => {
       const noHp = formatPhoneNumber(row.original['Nomor Telepon Pasien']);
       const namaPasien = row.original['Nama Pasien'];
-      const defaultMessage = `Halo ${namaPasien}. Kami dari Praktek Bidan Mandiri`;
+      const defaultMessage = `Halo ${namaPasien}. Kami dari Praktek Bidan `;
       return (
         <Button onClick={() => sendWhatsAppMessage(noHp, defaultMessage)}>
           <MessageSquareMore className="w-4 h-4 mr-4" />

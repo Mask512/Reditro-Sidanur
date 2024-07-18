@@ -68,19 +68,19 @@ export const DetailPersalinan = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="font-bold">Nama Anak:</label>
-                <p>{dataRiwayat.namaAnak}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.namaAnak}</p>
               </div>
               <div>
                 <label className="font-bold">Tanggal Persalinan:</label>
-                <p>{formatDateID(dataRiwayat.tanggalPersalinan)}</p>
+                <p className='text-muted-foreground'>{formatDateID(dataRiwayat.tanggalPersalinan)}</p>
               </div>
               <div>
                 <label className="font-bold">Jam Persalinan:</label>
-                <p>{dataRiwayat.jamPersalinan} WIB</p>
+                <p className='text-muted-foreground'>{dataRiwayat.jamPersalinan} WIB</p>
               </div>
               <div>
                 <label className="font-bold">Jenis Kelamin Anak:</label>
-                <p>
+                <p className='text-muted-foreground'>
                   {dataRiwayat.jenisKelaminAnak === 'LAKI_LAKI'
                     ? 'Laki laki'
                     : 'Perempuan'}
@@ -88,59 +88,59 @@ export const DetailPersalinan = () => {
               </div>
               <div>
                 <label className="font-bold">Berat Badan Anak:</label>
-                <p>{dataRiwayat.beratBadanAnak} gram</p>
+                <p className='text-muted-foreground'>{dataRiwayat.beratBadanAnak} gram</p>
               </div>
               <div>
                 <label className="font-bold">Panjang Badan Anak:</label>
-                <p>{dataRiwayat.panjangBadanAnak} cm</p>
+                <p className='text-muted-foreground'>{dataRiwayat.panjangBadanAnak} cm</p>
               </div>
               <div>
                 <label className="font-bold">Keadaan Anak:</label>
-                <p>{dataRiwayat.keadaanAnak}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.keadaanAnak}</p>
               </div>
               <div>
                 <label className="font-bold">Keadaan Ibu:</label>
-                <p>{dataRiwayat.keadaanIbu}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.keadaanIbu}</p>
               </div>
               <div>
                 <label className="font-bold">Golongan Darah:</label>
-                <p>{dataRiwayat.golonganDarah?.nama}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.golonganDarah?.nama}</p>
               </div>
               <div>
                 <label className="font-bold">Resusitasi:</label>
-                <p>{dataRiwayat.resusitasi === 'YES' ? 'Ya' : 'Tidak'}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.resusitasi === 'YES' ? 'Ya' : 'Tidak'}</p>
               </div>
               <div>
                 <label className="font-bold">Inisiasi Menyusui Dini:</label>
-                <p>{dataRiwayat.imd === 'YES' ? 'Ya' : 'Tidak'}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.imd === 'YES' ? 'Ya' : 'Tidak'}</p>
               </div>
               <div>
                 <label className="font-bold">Vitamin K:</label>
-                <p>{dataRiwayat.vitaminK === 'YES' ? 'Ya' : 'Tidak'}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.vitaminK === 'YES' ? 'Ya' : 'Tidak'}</p>
               </div>
               <div>
                 <label className="font-bold">Nama Ibu:</label>
-                <p>{dataRiwayat.pasien.nama}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.pasien.nama}</p>
               </div>
               <div>
                 <label className="font-bold">Alamat Ibu:</label>
-                <p>{dataRiwayat.pasien.alamat}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.pasien.alamat}</p>
               </div>
               <div>
                 <label className="font-bold">Tanggal Lahir Ibu:</label>
-                <p>{formatDateID(dataRiwayat.pasien.tanggalLahir)}</p>
+                <p className='text-muted-foreground'>{formatDateID(dataRiwayat.pasien.tanggalLahir)}</p>
               </div>
               <div>
                 <label className="font-bold">Nomor Telepon Ibu:</label>
-                <p>{dataRiwayat.pasien.noTelp}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.pasien.noTelp}</p>
               </div>
               <div>
                 <label className="font-bold">Nama Penanggung Jawab:</label>
-                <p>{dataRiwayat.pasien.namaPenanggungJawab}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.pasien.namaPenanggungJawab}</p>
               </div>
               <div>
                 <label className="font-bold">Nomor Telepon:</label>
-                <p>{dataRiwayat.pasien.noTelpDarurat}</p>
+                <p className='text-muted-foreground'>{dataRiwayat.pasien.noTelpDarurat}</p>
               </div>
             </div>
             <div className="hidden">

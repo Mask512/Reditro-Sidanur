@@ -64,7 +64,7 @@ export const formatDataToTable = (data: PemeriksaanType[]) => {
       item.riwayatKehamilanTPorHPL;
 
     // Skip data jika tanggal pemeriksaan atau tanggal kembali sudah melebihi hari ini
-    if (tanggalPemeriksaan && new Date(tanggalPemeriksaan) > new Date()) {
+    if (tanggalKembali && new Date(tanggalKembali) < new Date()) {
       return;
     }
 

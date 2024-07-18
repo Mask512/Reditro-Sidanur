@@ -41,9 +41,16 @@ import { AxiosError } from 'axios';
 const parentLinks = [{ href: '/', label: 'Home' }];
 
 export const Register = () => {
+  const [lastRMNumber, setLastRMNumber] = useState('');
+  const [golonganDarah, setGolonganDarah] = useState<GolonganDarahType[]>([]);
+  const [pendidikan, setPendidikan] = useState<PendidikanType[]>([]);
+  const [pekerjaan, setPekerjaan] = useState<PekerjaanType[]>([]);
+  const [hubungan, setHubungan] = useState<HubunganType[]>([]);
+
   const form = useForm<PatientType>({
     resolver: zodResolver(patientSchema),
     defaultValues: {
+      nomorPasien: lastRMNumber,
       nik: '',
       nama: '',
       tempatLahir: '',
@@ -55,13 +62,6 @@ export const Register = () => {
       jenisKelamin: 'WANITA',
     },
   });
-
-  const [lastRMNumber, setLastRMNumber] = useState('');
-  const [golonganDarah, setGolonganDarah] = useState<GolonganDarahType[]>([]);
-  const [pendidikan, setPendidikan] = useState<PendidikanType[]>([]);
-  const [pekerjaan, setPekerjaan] = useState<PekerjaanType[]>([]);
-  const [hubungan, setHubungan] = useState<HubunganType[]>([]);
-
   useEffect(() => {
     const getLastRM = async () => {
       const data = await Pasien.getTotalPasien();
@@ -112,8 +112,6 @@ export const Register = () => {
   const onSubmit = async (values: z.infer<typeof patientSchema>) => {
     try {
       const response = await Pasien.addPasien(values);
-      console.log(response);
-
       if (response.status === 201) {
         form.reset();
 
@@ -124,11 +122,12 @@ export const Register = () => {
       }
     } catch (error) {
       const err = error as AxiosError;
-      if( err && err.request?.status) {
+      if (err && err.request?.status) {
         toast({
           title: 'Gagal',
           variant: 'destructive',
-          description: 'Pasien gagal ditambahkan, NIK Sudah terdaftar / Data salah',
+          description:
+            'Pasien gagal ditambahkan, NIK Sudah terdaftar / Data salah',
         });
       }
     }
@@ -152,11 +151,7 @@ export const Register = () => {
                 <FormItem>
                   <FormLabel>NO RM</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Nomor RM"
-                      {...field}
-                      value={lastRMNumber}
-                    />
+                    <Input placeholder="Nomor RM" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -449,7 +444,7 @@ export const Register = () => {
                   <FormItem>
                     <FormLabel>No. Telepon</FormLabel>
                     <FormControl>
-                      <Input placeholder="Nomor Telepon" {...field} />
+                      <Input placeholder="0813123123" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

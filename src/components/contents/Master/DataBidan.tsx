@@ -19,7 +19,6 @@ import { DataBidanForm } from '@/components/DataBidanForm';
 import { getBidans } from '@/data/api/api';
 import { BidanType } from '@/schema/schema';
 
-
 const parentLinks = [{ href: '/master-data', label: 'Master Data' }];
 
 export const DataBidan = () => {
@@ -81,7 +80,14 @@ export const DataBidan = () => {
             <DataBidanForm onSubmitSuccess={handleSubmitSuccess} />
           </DialogContent>
         </Dialog>
-        <DataTable columns={dataBidanColumns(deleteBidan)} data={dataBidan} />
+        <DataTable
+          columns={dataBidanColumns(deleteBidan)}
+          data={dataBidan}
+          filterColumns={{
+            key: 'nama',
+            placeholder: 'Cari Nama ...',
+          }}
+        />
       </div>
     </>
   );

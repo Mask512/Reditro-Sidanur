@@ -113,7 +113,7 @@ export const DataBidanForm: React.FC<DataBidanFormProps> = ({
             <FormItem className="grid grid-cols-4 items-center gap-4">
               <FormLabel className="text-right">Nama</FormLabel>
               <FormControl className="col-span-3">
-                <Input placeholder="Nama" {...field} />
+                <Input placeholder="Nama / masukan gelar" {...field} />
               </FormControl>
               <FormMessage className="col-span-4 text-center" />
             </FormItem>

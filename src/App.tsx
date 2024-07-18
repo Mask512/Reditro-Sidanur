@@ -27,6 +27,7 @@ import { Activate } from './pages/Activate';
 import { DataPasien } from './components/contents/DataPasien';
 import { UpdatePasien } from './components/contents/UpdatePasien';
 import { DetailPasien } from './components/contents/DetailPasien';
+import { DetailPersalinan } from './components/contents/DetailPersalinan';
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -39,7 +40,6 @@ function App() {
             <ModeToggle />
           </div>
           <Routes>
-            {/* <Route path="/" element={<Login background={APP.BG} />} /> */}
             <Route path="*" element={<Login background={APP.BG} />} />
             <Route path="/activate/" element={<Activate />} />
           </Routes>
@@ -76,8 +76,12 @@ function App() {
                   element={<RiwayatKehamilan />}
                 />
                 <Route
-                  path="/riwayat-persalinan"
+                  path="/riwayat-persalinan/*"
                   element={<RiwayatPersalinan />}
+                />
+                <Route
+                  path="/riwayat-persalinan/:patientId"
+                  element={<DetailPersalinan />}
                 />
                 <Route path="/riwayat-nifas" element={<RiwayatNifas />} />
                 <Route path="/riwayat-kb" element={<RiwayatKB />} />

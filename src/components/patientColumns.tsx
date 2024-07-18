@@ -5,12 +5,13 @@ import { ArrowUpDown } from 'lucide-react';
 import { formatDateID } from '@/utils/formatter';
 import React from 'react';
 
-
 interface PatientColumnsProps {
-  action: (id: string) => React.ReactNode; 
+  action: (id: string) => React.ReactNode;
 }
 
-export const patientColumns = ({action}: PatientColumnsProps): ColumnDef<PatientType>[] => [
+export const patientColumns = ({
+  action,
+}: PatientColumnsProps): ColumnDef<PatientType>[] => [
   {
     accessorKey: 'nomorPasien',
     header: ({ column }) => {
@@ -71,6 +72,6 @@ export const patientColumns = ({action}: PatientColumnsProps): ColumnDef<Patient
 
   {
     id: 'action',
-    cell: ({ row }) =>  action(row.original.id || ''),
+    cell: ({ row }) => action(row.original.id || ''),
   },
 ];

@@ -4,11 +4,14 @@ import { BreadCrumb } from '@/components/BreadCrumb';
 import { DataTable } from '@/components/ui/data-table';
 import { riwayatPersalinanColumns } from './riwayatPersalinan-columns';
 import { getRiwayatPersalinan } from '@/data/api/api';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
 export const RiwayatPersalinan = () => {
   const [persalinan, setPersalinan] = useState<PersalinanType[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +22,15 @@ export const RiwayatPersalinan = () => {
     };
     fetchData();
   }, []);
+
+  const handleAction = (id: string): React.ReactNode => {
+    return (
+      <>
+        <Button onClick={() => navigate(`/riwayat-persalinan/${id}`)}>Detail</Button>
+      </>
+    );
+  };
+
   return (
     <>
       <BreadCrumb pageName="Riwayat Persalinan" parentLinks={parentLinks} />
@@ -26,7 +38,7 @@ export const RiwayatPersalinan = () => {
         Riwayat Persalinan
       </h2>
       <DataTable
-        columns={riwayatPersalinanColumns()}
+        columns={riwayatPersalinanColumns({handleAction})}
         data={persalinan}
         filterColumns={{
           key: 'pasien',

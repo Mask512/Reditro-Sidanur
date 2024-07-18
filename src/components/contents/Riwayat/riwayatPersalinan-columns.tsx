@@ -1,9 +1,15 @@
-import { Button } from '@/components/ui/button';
 import { PersalinanType } from '@/schema/schema';
 import { formatDateID } from '@/utils/formatter';
 import { ColumnDef } from '@tanstack/react-table';
+import React from 'react';
 
-export const riwayatPersalinanColumns = (): ColumnDef<PersalinanType>[] => [
+interface riwayatPersalinanColumnsProps {
+  handleAction: (id: string) => React.ReactNode;
+}
+
+export const riwayatPersalinanColumns = (
+  {handleAction}: riwayatPersalinanColumnsProps,
+): ColumnDef<PersalinanType>[] => [
   {
     id: 'Nomor RM',
     header: 'Nomor RM',
@@ -52,9 +58,6 @@ export const riwayatPersalinanColumns = (): ColumnDef<PersalinanType>[] => [
   },
   {
     id: 'action',
-    cell: ({ row }) => {
-      const id = row.original.pasien.id;
-      return <Button onClick={() => alert(id)}>Detail</Button>;
-    },
+    cell: ({ row }) => handleAction(row.original.id as string),
   },
 ];

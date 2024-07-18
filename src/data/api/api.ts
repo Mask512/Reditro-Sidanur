@@ -241,6 +241,15 @@ export const getTotalKehamilans = async () => {
 export const getRiwayatPersalinan = async () => {
   const { data } = await axios.get(`${apiBaseUrl}/persalinans`);
   if (data) {
+    console.log(data);
+    
+    return data;
+  }
+};
+
+export const getRiwayatPersalinanById = async (id: string) => {
+  const { data } = await axios.get(`${apiBaseUrl}/persalinans/${id}`);
+  if (data) {
     return data;
   }
 };

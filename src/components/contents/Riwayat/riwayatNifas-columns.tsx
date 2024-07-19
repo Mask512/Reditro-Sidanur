@@ -1,9 +1,14 @@
-import { Button } from '@/components/ui/button';
 import { PemeriksaanNifasType } from '@/schema/schema';
 import { formatDateID } from '@/utils/formatter';
 import { ColumnDef } from '@tanstack/react-table';
 
-export const riwayatNifasColumns = (): ColumnDef<PemeriksaanNifasType>[] => [
+interface riwayatNifasColumnsProps {
+  handleAction: (id: string) => React.ReactNode;
+}
+
+export const riwayatNifasColumns = ({
+  handleAction,
+}: riwayatNifasColumnsProps): ColumnDef<PemeriksaanNifasType>[] => [
   {
     id: 'Nomor RM',
     header: 'Nomor RM',
@@ -52,9 +57,6 @@ export const riwayatNifasColumns = (): ColumnDef<PemeriksaanNifasType>[] => [
   },
   {
     id: 'action',
-    cell: ({ row }) => {
-      const id = row.original.pasien.id;
-      return <Button onClick={() => alert(id)}>Detail</Button>;
-    },
+    cell: ({ row }) => handleAction(row.original.id as string),
   },
 ];

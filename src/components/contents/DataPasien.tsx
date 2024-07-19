@@ -16,21 +16,24 @@ import {
 import { Pasien } from '@/data/api/pasien';
 import { useToast } from '../ui/use-toast';
 import { AxiosError } from 'axios';
+import { useState } from 'react';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
 export const DataPasien = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [reloadData, setReloadData] = useState<boolean>(false);
 
   const handleDelete = async (id: string) => {
     try {
       const response = await Pasien.deletePasien(id);
-      if (response.status === 200) {
+      if (response.status === 204) {
         toast({
           title: 'Berhasil',
           description: 'Pasien berhasil dihapus.',
         });
+        setReloadData(!reloadData);
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -78,6 +81,7 @@ export const DataPasien = () => {
       </div>
     );
   };
+
   return (
     <>
       <Routes>
@@ -86,7 +90,7 @@ export const DataPasien = () => {
           element={
             <>
               <BreadCrumb pageName="Data Pasien" parentLinks={parentLinks} />
-              <PatientTable action={handleAction} />
+              <PatientTable key={reloadData ? 'reload' : 'no-reload'} action={handleAction} />
             </>
           }
         />

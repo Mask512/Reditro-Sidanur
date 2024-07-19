@@ -43,7 +43,7 @@ export const RiwayatKehamilan = () => {
   const handleAction = (id: string): React.ReactNode => {
     const selectedPemeriksaan = riwayatKehamilan.find((item) => item.id === id);
     if (!selectedPemeriksaan) {
-      return null; // Tambahkan penanganan jika pemeriksaan tidak ditemukan
+      return null;
     }
     const {
       tanggalPemeriksaan,

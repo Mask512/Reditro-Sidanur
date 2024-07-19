@@ -32,10 +32,14 @@ import {
 
 interface DataBidanFormProps {
   onSubmitSuccess?: () => void;
+  isNew?: boolean;
+  oldData?: BidanType;
 }
 
 export const DataBidanForm: React.FC<DataBidanFormProps> = ({
   onSubmitSuccess,
+  isNew,
+  oldData,
 }) => {
   const [locations, setLocations] = useState<LokasiPraktekType[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
@@ -70,32 +74,51 @@ export const DataBidanForm: React.FC<DataBidanFormProps> = ({
 
   const form = useForm<BidanType>({
     resolver: zodResolver(bidanSchema),
-    defaultValues: {
-      id: '',
-      alamat: '',
-      jabatan: '',
-      nama: '',
-      noHp: '',
-      noSTR: '',
-      tempatLahir: '',
-      tanggalLahir: '',
-      jenisKelamin: 'WANITA',
-    },
+    defaultValues: isNew
+      ? {
+          id: '',
+          alamat: '',
+          jabatan: '',
+          nama: '',
+          noHp: '',
+          noSTR: '',
+          tempatLahir: '',
+          tanggalLahir: '',
+          jenisKelamin: 'WANITA',
+        }
+      : { ...oldData },
   });
 
   const handleSubmit = async (values: BidanType) => {
-    const response = await axios.post(`${APP.API_URL}/bidans`, values);
+    if (isNew) {
+      const response = await axios.post(`${APP.API_URL}/bidans`, values);
 
-    if (response.status === 201) {
-      form.reset();
+      if (response.status === 201) {
+        form.reset();
 
-      toast({
-        title: 'Sukses!',
-        description: 'Bidan berhasil ditambahkan',
-      });
+        toast({
+          title: 'Sukses!',
+          description: 'Bidan berhasil ditambahkan',
+        });
 
-      if (onSubmitSuccess) {
-        onSubmitSuccess();
+        if (onSubmitSuccess) {
+          onSubmitSuccess();
+        }
+      }
+    } else {
+      const response = await axios.put(`${APP.API_URL}/bidans/${oldData?.id}`, values);
+
+      if (response.status === 200) {
+        form.reset();
+
+        toast({
+          title: 'Sukses!',
+          description: 'Data berhasil diubah',
+        });
+
+        if (onSubmitSuccess) {
+          onSubmitSuccess();
+        }
       }
     }
   };

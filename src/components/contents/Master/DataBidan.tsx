@@ -6,7 +6,8 @@ import axios from 'axios';
 import { APP } from '@/data/app';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-
+import { ConfirmAlert } from '@/components/ConfirmAlert';
+import { Trash } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -61,6 +62,46 @@ export const DataBidan = () => {
     fetchData();
   }, [setDataBidan]);
 
+  const handleAction = (id: string) => {
+    const selectedBidan = dataBidan.find((bidan) => bidan.id === id);
+    if (!selectedBidan) {
+      return null;
+    }
+    return (
+      <div className="flex gap-2">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="secondary">Edit</Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md md:max-w-lg overflow-y-scroll max-h-screen">
+            <DialogHeader>
+              <DialogTitle>Data Bidan</DialogTitle>
+              <DialogDescription>
+                Isi data bidan dengan lengkap.
+              </DialogDescription>
+            </DialogHeader>
+            <DataBidanForm
+              onSubmitSuccess={handleSubmitSuccess}
+              isNew={false}
+              oldData={selectedBidan}
+            />
+          </DialogContent>
+        </Dialog>
+
+        <ConfirmAlert
+          messages={{
+            title: 'Hapus Data Bidan ?',
+            description: `${selectedBidan.nama} akan dihapus secara permanen .`,
+          }}
+          buttonVariant="destructive"
+          action={() => deleteBidan(id)}
+          actionName="Hapus"
+          icon={<Trash className="mr-2 h-4 w-4" />}
+        />
+      </div>
+    );
+  };
+
   return (
     <>
       <BreadCrumb pageName="Data Bidan" parentLinks={parentLinks} />
@@ -77,11 +118,11 @@ export const DataBidan = () => {
                 Isi data bidan dengan lengkap.
               </DialogDescription>
             </DialogHeader>
-            <DataBidanForm onSubmitSuccess={handleSubmitSuccess} />
+            <DataBidanForm onSubmitSuccess={handleSubmitSuccess} isNew />
           </DialogContent>
         </Dialog>
         <DataTable
-          columns={dataBidanColumns(deleteBidan)}
+          columns={dataBidanColumns({ handleAction })}
           data={dataBidan}
           filterColumns={{
             key: 'nama',

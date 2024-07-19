@@ -19,7 +19,7 @@ import { pengingatColumns } from './pengingat-Columns';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const Pengingat = () => {
+const Pengingat = () => {
   const [reminderData, setReminderData] = useState<FormattedDataRow[]>([]);
 
   useEffect(() => {
@@ -75,3 +75,5 @@ export const Pengingat = () => {
     </>
   );
 };
+
+export default Pengingat;

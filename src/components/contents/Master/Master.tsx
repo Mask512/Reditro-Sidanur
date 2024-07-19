@@ -10,7 +10,7 @@ import { JenisKB } from './JenisKB';
 import { DataBidan } from './DataBidan';
 import { JenisImunisasi } from './JenisImunisasi';
 
-export const Master = () => {
+const Master = () => {
   return (
     <Routes>
       <Route path="/" element={<MasterDataHome />} />
@@ -26,3 +26,5 @@ export const Master = () => {
     </Routes>
   );
 };
+
+export default Master;

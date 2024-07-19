@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const Persalinan = () => {
+const Persalinan = () => {
   const navigate = useNavigate();
 
   const handleAction = (id: string) => {
@@ -31,3 +31,5 @@ export const Persalinan = () => {
     </>
   );
 };
+
+export default Persalinan;

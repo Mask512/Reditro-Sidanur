@@ -6,12 +6,10 @@ import { Button } from '@/components/ui/button';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const Nifas = () => {
+const Nifas = () => {
   const navigate = useNavigate();
   const handleAction = (id: string) => {
-    return (
-      <Button onClick={() => navigate(`/nifas/${id}`)}>Periksa</Button>
-    );
+    return <Button onClick={() => navigate(`/nifas/${id}`)}>Periksa</Button>;
   };
   return (
     <>
@@ -33,3 +31,5 @@ export const Nifas = () => {
     </>
   );
 };
+
+export default Nifas;

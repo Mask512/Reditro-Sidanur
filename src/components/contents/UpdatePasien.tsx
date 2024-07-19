@@ -41,7 +41,7 @@ const parentLinks = [
   { href: '/data-pasien', label: 'Data Pasien' },
 ];
 
-export const UpdatePasien = () => {
+const UpdatePasien = () => {
   const { patientId } = useParams<{ patientId: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -473,3 +473,5 @@ export const UpdatePasien = () => {
     </div>
   );
 };
+
+export default UpdatePasien;

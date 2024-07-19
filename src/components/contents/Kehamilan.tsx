@@ -6,9 +6,9 @@ import { Button } from '../ui/button';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const Kehamilan = () => {
+const Kehamilan = () => {
   const navigate = useNavigate();
-  
+
   const handleAction = (id: string) => {
     return (
       <Button onClick={() => navigate(`/kehamilan/${id}`)}>Periksa</Button>
@@ -34,3 +34,5 @@ export const Kehamilan = () => {
     </>
   );
 };
+
+export default Kehamilan;

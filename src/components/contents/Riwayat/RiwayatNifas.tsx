@@ -25,7 +25,7 @@ import { formatDateID } from '@/utils/formatter';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const RiwayatNifas = () => {
+const RiwayatNifas = () => {
   const [riwayatNifas, setRiwayatNifas] = useState<PemeriksaanNifasType[]>([]);
 
   useEffect(() => {
@@ -148,3 +148,4 @@ export const RiwayatNifas = () => {
     </>
   );
 };
+export default RiwayatNifas;

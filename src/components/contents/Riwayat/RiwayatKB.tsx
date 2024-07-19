@@ -7,7 +7,7 @@ import { DataTable } from '@/components/ui/data-table';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const RiwayatKB = () => {
+const RiwayatKB = () => {
   const [riwayatKB, setRiwayatKB] = useState<PemeriksaanKBType[]>([]);
 
   useEffect(() => {
@@ -36,3 +36,5 @@ export const RiwayatKB = () => {
     </>
   );
 };
+
+export default RiwayatKB;

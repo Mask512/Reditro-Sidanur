@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const RiwayatPersalinan = () => {
+const RiwayatPersalinan = () => {
   const [persalinan, setPersalinan] = useState<PersalinanType[]>([]);
   const navigate = useNavigate();
 
@@ -26,7 +26,9 @@ export const RiwayatPersalinan = () => {
   const handleAction = (id: string): React.ReactNode => {
     return (
       <>
-        <Button onClick={() => navigate(`/riwayat-persalinan/${id}`)}>Detail</Button>
+        <Button onClick={() => navigate(`/riwayat-persalinan/${id}`)}>
+          Detail
+        </Button>
       </>
     );
   };
@@ -38,7 +40,7 @@ export const RiwayatPersalinan = () => {
         Riwayat Persalinan
       </h2>
       <DataTable
-        columns={riwayatPersalinanColumns({handleAction})}
+        columns={riwayatPersalinanColumns({ handleAction })}
         data={persalinan}
         filterColumns={{
           key: 'pasien',
@@ -48,3 +50,5 @@ export const RiwayatPersalinan = () => {
     </>
   );
 };
+
+export default RiwayatPersalinan;

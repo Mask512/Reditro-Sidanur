@@ -20,7 +20,7 @@ import { useState } from 'react';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const DataPasien = () => {
+const DataPasien = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [reloadData, setReloadData] = useState<boolean>(false);
@@ -90,7 +90,10 @@ export const DataPasien = () => {
           element={
             <>
               <BreadCrumb pageName="Data Pasien" parentLinks={parentLinks} />
-              <PatientTable key={reloadData ? 'reload' : 'no-reload'} action={handleAction} />
+              <PatientTable
+                key={reloadData ? 'reload' : 'no-reload'}
+                action={handleAction}
+              />
             </>
           }
         />
@@ -98,3 +101,5 @@ export const DataPasien = () => {
     </>
   );
 };
+
+export default DataPasien;

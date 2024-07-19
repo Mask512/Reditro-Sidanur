@@ -40,7 +40,7 @@ import { AxiosError } from 'axios';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const Register = () => {
+const Register = () => {
   const [lastRMNumber, setLastRMNumber] = useState('');
   const [golonganDarah, setGolonganDarah] = useState<GolonganDarahType[]>([]);
   const [pendidikan, setPendidikan] = useState<PendidikanType[]>([]);
@@ -470,3 +470,5 @@ export const Register = () => {
     </>
   );
 };
+
+export default Register;

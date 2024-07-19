@@ -6,13 +6,10 @@ import { Button } from '../ui/button';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const KB = () => {
+const KB = () => {
   const navigate = useNavigate();
-  
   const handleAction = (id: string) => {
-    return (
-      <Button onClick={() => navigate(`/kb/${id}`)}>Periksa</Button>
-    );
+    return <Button onClick={() => navigate(`/kb/${id}`)}>Periksa</Button>;
   };
   return (
     <>
@@ -29,9 +26,10 @@ export const KB = () => {
             </>
           }
         />
-        <Route path='/:patientId' element={<KBForm/>}>
-        </Route>
+        <Route path="/:patientId" element={<KBForm />}></Route>
       </Routes>
     </>
   );
 };
+
+export default KB;

@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 
-export const DetailPersalinan = () => {
+const DetailPersalinan = () => {
   const { patientId } = useParams<{ patientId: string }>();
   const [dataRiwayat, setDataRiwayat] = useState<PersalinanType | null>(null);
   const [lokasiPraktek, setLokasiPraktek] = useState<LokasiPraktekType | null>(
@@ -68,19 +68,23 @@ export const DetailPersalinan = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="font-bold">Nama Anak:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.namaAnak}</p>
+                <p className="text-muted-foreground">{dataRiwayat.namaAnak}</p>
               </div>
               <div>
                 <label className="font-bold">Tanggal Persalinan:</label>
-                <p className='text-muted-foreground'>{formatDateID(dataRiwayat.tanggalPersalinan)}</p>
+                <p className="text-muted-foreground">
+                  {formatDateID(dataRiwayat.tanggalPersalinan)}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Jam Persalinan:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.jamPersalinan} WIB</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.jamPersalinan} WIB
+                </p>
               </div>
               <div>
                 <label className="font-bold">Jenis Kelamin Anak:</label>
-                <p className='text-muted-foreground'>
+                <p className="text-muted-foreground">
                   {dataRiwayat.jenisKelaminAnak === 'LAKI_LAKI'
                     ? 'Laki laki'
                     : 'Perempuan'}
@@ -88,59 +92,87 @@ export const DetailPersalinan = () => {
               </div>
               <div>
                 <label className="font-bold">Berat Badan Anak:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.beratBadanAnak} gram</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.beratBadanAnak} gram
+                </p>
               </div>
               <div>
                 <label className="font-bold">Panjang Badan Anak:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.panjangBadanAnak} cm</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.panjangBadanAnak} cm
+                </p>
               </div>
               <div>
                 <label className="font-bold">Keadaan Anak:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.keadaanAnak}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.keadaanAnak}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Keadaan Ibu:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.keadaanIbu}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.keadaanIbu}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Golongan Darah:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.golonganDarah?.nama}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.golonganDarah?.nama}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Resusitasi:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.resusitasi === 'YES' ? 'Ya' : 'Tidak'}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.resusitasi === 'YES' ? 'Ya' : 'Tidak'}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Inisiasi Menyusui Dini:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.imd === 'YES' ? 'Ya' : 'Tidak'}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.imd === 'YES' ? 'Ya' : 'Tidak'}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Vitamin K:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.vitaminK === 'YES' ? 'Ya' : 'Tidak'}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.vitaminK === 'YES' ? 'Ya' : 'Tidak'}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Nama Ibu:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.pasien.nama}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.pasien.nama}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Alamat Ibu:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.pasien.alamat}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.pasien.alamat}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Tanggal Lahir Ibu:</label>
-                <p className='text-muted-foreground'>{formatDateID(dataRiwayat.pasien.tanggalLahir)}</p>
+                <p className="text-muted-foreground">
+                  {formatDateID(dataRiwayat.pasien.tanggalLahir)}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Nomor Telepon Ibu:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.pasien.noTelp}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.pasien.noTelp}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Nama Penanggung Jawab:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.pasien.namaPenanggungJawab}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.pasien.namaPenanggungJawab}
+                </p>
               </div>
               <div>
                 <label className="font-bold">Nomor Telepon:</label>
-                <p className='text-muted-foreground'>{dataRiwayat.pasien.noTelpDarurat}</p>
+                <p className="text-muted-foreground">
+                  {dataRiwayat.pasien.noTelpDarurat}
+                </p>
               </div>
             </div>
             <div className="hidden">
@@ -164,7 +196,11 @@ export const DetailPersalinan = () => {
                     Print atau download surat keterangan lahir.
                   </DialogDescription>
                   <PDFViewer height="100%" width="100%">
-                    <PrintSuratKelahiran lokasi={lokasiPraktek} data={dataRiwayat} image={qrCodeURI} />
+                    <PrintSuratKelahiran
+                      lokasi={lokasiPraktek}
+                      data={dataRiwayat}
+                      image={qrCodeURI}
+                    />
                   </PDFViewer>
                 </DialogHeader>
               </DialogContent>
@@ -175,3 +211,5 @@ export const DetailPersalinan = () => {
     )
   );
 };
+
+export default DetailPersalinan;

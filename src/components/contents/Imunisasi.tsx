@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const Imunisasi = () => {
+const Imunisasi = () => {
   const navigate = useNavigate();
 
   const handleAction = (id: string) => {
@@ -32,3 +32,5 @@ export const Imunisasi = () => {
     </>
   );
 };
+
+export default Imunisasi;

@@ -12,7 +12,7 @@ import { SquareArrowLeft } from 'lucide-react';
 import axios, { AxiosError } from 'axios';
 import { APP } from '@/data/app';
 
-export const Activate = () => {
+const Activate = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
@@ -64,3 +64,5 @@ export const Activate = () => {
     </div>
   );
 };
+
+export default Activate;

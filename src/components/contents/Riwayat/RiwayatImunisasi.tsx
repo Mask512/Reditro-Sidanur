@@ -7,7 +7,7 @@ import { riwayatImunisasiColumns } from './riwayatImunisasi-columns';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const RiwayatImunisasi = () => {
+const RiwayatImunisasi = () => {
   const [riwayatImunisasi, setRiwayatImunisasi] = useState<
     PemeriksaanImunisasiType[]
   >([]);
@@ -38,3 +38,5 @@ export const RiwayatImunisasi = () => {
     </>
   );
 };
+
+export default RiwayatImunisasi;

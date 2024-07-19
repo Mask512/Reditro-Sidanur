@@ -12,7 +12,7 @@ const parentLinks = [
   { href: '/data-pasien', label: 'Data Pasien' },
 ];
 
-export const DetailPasien = () => {
+const DetailPasien = () => {
   const [dataPatient, setDataPatient] = useState<PatientType | null>(null);
   const { patientId } = useParams<{ patientId: string }>();
   const { toast } = useToast();
@@ -48,7 +48,7 @@ export const DetailPasien = () => {
   return (
     dataPatient && (
       <>
-      <BreadCrumb parentLinks={parentLinks} pageName={dataPatient.nama}/>
+        <BreadCrumb parentLinks={parentLinks} pageName={dataPatient.nama} />
         <div className="max-w-xl mx-auto">
           <PatientBiodata patientData={dataPatient} />
         </div>
@@ -56,3 +56,5 @@ export const DetailPasien = () => {
     )
   );
 };
+
+export default DetailPasien;

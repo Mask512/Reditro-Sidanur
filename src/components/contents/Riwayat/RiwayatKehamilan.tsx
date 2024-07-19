@@ -25,7 +25,7 @@ import { formatDateID } from '@/utils/formatter';
 
 const parentLinks = [{ href: '/', label: 'Home' }];
 
-export const RiwayatKehamilan = () => {
+const RiwayatKehamilan = () => {
   const [riwayatKehamilan, setRiwayatKehamilan] = useState<
     PemeriksaanKehamilanType[]
   >([]);
@@ -174,3 +174,5 @@ export const RiwayatKehamilan = () => {
     </>
   );
 };
+
+export default RiwayatKehamilan;

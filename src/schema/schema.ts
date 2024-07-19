@@ -143,6 +143,7 @@ export const pemeriksaanNifasSchema = z.object({
 });
 
 export const pemeriksaanKehamilanSchema = z.object({
+  id: z.string().optional(),
   tanggalPemeriksaan: z.string().date(),
   anamnesa: z.string(),
   ttvTekananDarah: z.string(),

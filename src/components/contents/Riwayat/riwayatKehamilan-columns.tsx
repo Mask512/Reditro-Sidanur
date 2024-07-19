@@ -1,10 +1,13 @@
-import { Button } from '@/components/ui/button';
 import { PemeriksaanKehamilanType } from '@/schema/schema';
 import { formatDateID } from '@/utils/formatter';
 import { ColumnDef } from '@tanstack/react-table';
 
+interface riwayatKehamilanColumnsProps {
+  handleAction: (id: string) => React.ReactNode;
+}
+
 export const riwayatKehamilanColumns =
-  (): ColumnDef<PemeriksaanKehamilanType>[] => [
+  ({handleAction}:riwayatKehamilanColumnsProps): ColumnDef<PemeriksaanKehamilanType>[] => [
     {
       id: 'Nomor RM',
       header: 'Nomor RM',
@@ -51,9 +54,6 @@ export const riwayatKehamilanColumns =
     },
     {
       id: 'action',
-      cell: ({ row }) => {
-        const id = row.original.pasien.id;
-        return <Button onClick={() => alert(id)}>Detail</Button>;
-      },
+      cell: ({ row }) => handleAction(row.original.id as string),
     },
   ];

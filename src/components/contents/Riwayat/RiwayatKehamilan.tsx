@@ -107,13 +107,13 @@ const RiwayatKehamilan = () => {
                 <p>Anamnesa </p>
                 <p>: {anamnesa}</p>
                 <p>Tekanan Darah </p>
-                <p>: {ttvTekananDarah}</p>
+                <p>: {ttvTekananDarah} mmHg</p>
                 <p>Nadi </p>
-                <p>: {ttvNadi}</p>
+                <p>: {ttvNadi} bpm</p>
                 <p>Suhu </p>
-                <p>: {ttvSuhu}</p>
+                <p>: {ttvSuhu} c</p>
                 <p>Respirasi </p>
-                <p>: {ttvRespirasi}</p>
+                <p>: {ttvRespirasi} x/mnt</p>
                 <p>SPO2 </p>
                 <p>: {ttvSPO2} %</p>
                 <p>Berat Badan </p>
@@ -132,11 +132,11 @@ const RiwayatKehamilan = () => {
                 <p>Usia Kehamilan </p>
                 <p>: {pemeriksaanUsiaKehamilan}</p>
                 <p>TFU </p>
-                <p>: {pemeriksaanTFU}</p>
+                <p>: {pemeriksaanTFU} cm</p>
                 <p>LILA </p>
-                <p>: {pemeriksaanLILA}</p>
+                <p>: {pemeriksaanLILA} cm</p>
                 <p>DJJ </p>
-                <p>: {pemeriksaanDJJ}</p>
+                <p>: {pemeriksaanDJJ} bpm</p>
                 <p>Diagnosa </p>
                 <p>: {diagnosa}</p>
                 <p>Asuhan </p>

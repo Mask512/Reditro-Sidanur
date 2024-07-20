@@ -115,15 +115,31 @@ export const KehamilanForm = () => {
     }
   };
 
+  const calculateEstimatedAge = (hphtDate: string): string => {
+    const today = new Date();
+    const hpht = new Date(hphtDate);
+
+    const diffTime = Math.abs(today.getTime() - hpht.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    const estimatedWeeks = Math.floor(diffDays / 7);
+    const estimatedDays = diffDays % 7;
+
+    return `${estimatedWeeks} minggu ${estimatedDays} hari`;
+  };
+
   const handleCalculate = () => {
     const hpht = form.getValues('riwayatKehamilanHPHT');
     if (hpht) {
       const hphtDate = new Date(hpht);
-      const eddDate = new Date(hphtDate.getTime() + 280 * 24 * 60 * 60 * 1000); // Calculate EDD (HPHT + 280 days)
+      const eddDate = new Date(hphtDate.getTime() + 280 * 24 * 60 * 60 * 1000);
       form.setValue(
         'riwayatKehamilanTPorHPL',
         eddDate.toISOString().split('T')[0],
       );
+
+      const estimatedAge = calculateEstimatedAge(hpht);
+      form.setValue('pemeriksaanUsiaKehamilan', estimatedAge);
     }
   };
 
@@ -144,7 +160,7 @@ export const KehamilanForm = () => {
         <Separator />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="tanggalPemeriksaan"
@@ -213,7 +229,7 @@ export const KehamilanForm = () => {
             <h4 className="underline underline-offset-4 font-semibold text-lg">
               Tanda Tanda Vital
             </h4>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid md:grid-cols-4 gap-4">
               <FormField
                 control={form.control}
                 name="ttvTekananDarah"
@@ -309,7 +325,7 @@ export const KehamilanForm = () => {
             <h4 className="underline underline-offset-4 font-semibold text-lg">
               Riwayat Kehamilan
             </h4>
-            <div className="grid grid-cols-12 gap-4">
+            <div className="grid md:grid-cols-12 gap-4">
               <FormField
                 control={form.control}
                 name="riwayatKehamilanGPA1"
@@ -396,7 +412,7 @@ export const KehamilanForm = () => {
             <h4 className="underline underline-offset-4 font-semibold text-lg">
               Pemeriksaan
             </h4>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid md:grid-cols-4 gap-4">
               <FormField
                 control={form.control}
                 name="pemeriksaanUsiaKehamilan"
@@ -404,7 +420,7 @@ export const KehamilanForm = () => {
                   <FormItem>
                     <FormLabel>Usia Kehamilan</FormLabel>
                     <FormControl>
-                      <Input placeholder="Minggu" {...field} />
+                      <Input placeholder="... Minggu ... Hari" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -481,7 +497,7 @@ export const KehamilanForm = () => {
             <h4 className="underline underline-offset-4 font-semibold text-lg">
               Planning
             </h4>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="planningAsuhan"

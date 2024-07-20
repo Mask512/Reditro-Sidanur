@@ -82,17 +82,13 @@ export const formatDataToTable = (data: PemeriksaanType[]) => {
     formattedData.push(row);
   });
 
-  // Sortir berdasarkan tanggal pemeriksaan terdekat ke hari ini ke terlama
+  // Sortir berdasarkan tanggal kembali terdekat ke hari ini ke terlama
   formattedData.sort((a, b) => {
-    const dateA = a['Tanggal Pemeriksaan']
-      ? new Date(a['Tanggal Pemeriksaan'])
-      : null;
-    const dateB = b['Tanggal Pemeriksaan']
-      ? new Date(b['Tanggal Pemeriksaan'])
-      : null;
+    const dateA = a['Tanggal Kembali'] ? new Date(a['Tanggal Kembali']) : null;
+    const dateB = b['Tanggal Kembali'] ? new Date(b['Tanggal Kembali']) : null;
 
     if (dateA && dateB) {
-      return dateB.getTime() - dateA.getTime(); // Balikkan urutan dateB - dateA untuk terdekat ke terlama
+      return dateA.getTime() - dateB.getTime(); // Urutan dateA - dateB untuk terdekat ke terlama
     } else if (dateA) {
       return -1; // dateA ada, dateB tidak ada, sehingga dateA lebih awal dari dateB
     } else if (dateB) {
@@ -108,15 +104,15 @@ export const formatDataToTable = (data: PemeriksaanType[]) => {
 export const daysUntil = (inputDate: string) => {
   // Membuat objek Date dari input tanggal
   const targetDate = new Date(inputDate);
-  
+
   // Mendapatkan tanggal hari ini
   const today = new Date();
-  
+
   // Menghitung perbedaan dalam milidetik antara targetDate dan today
   const difference = targetDate.getTime() - today.getTime();
-  
+
   // Menghitung jumlah hari dari perbedaan dalam milidetik
   const days = Math.ceil(difference / (1000 * 3600 * 24));
-  
+
   return days;
-}
+};

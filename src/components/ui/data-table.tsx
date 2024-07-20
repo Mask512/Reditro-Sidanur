@@ -83,9 +83,9 @@ export function DataTable<TData, TValue>({
   };
 
   return (
-    <>
+    <div className='space-y-4 max-w-md overflow-auto md:max-w-full'>
       {/* filtering */}
-      <div className="flex items-center pt-4">
+      <div className="flex items-center gap-4">
         {renderFilter()}
 
         <DropdownMenu>
@@ -183,6 +183,6 @@ export function DataTable<TData, TValue>({
           Next
         </Button>
       </div>
-    </>
+    </div>
   );
 }

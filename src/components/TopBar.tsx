@@ -8,7 +8,7 @@ export const TopBar = () => {
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <SideNavDrawer />
       <div className="w-full flex-1 ">
-        <Brand className="md:hidden" />
+        <Brand className="hidden md:flex" />
       </div>
 
       <ProfileMenu  />

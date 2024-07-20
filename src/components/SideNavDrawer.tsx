@@ -28,7 +28,7 @@ export const SideNavDrawer = () => {
       </SheetTrigger>
 
       {/* Nav Content */}
-      <SheetContent side="left" className="flex flex-col">
+      <SheetContent side="left" className="flex flex-col max-w-72">
         <DialogHeader className="hidden sr-only">
           <DialogTitle>Menu</DialogTitle>
           <DialogDescription>Menu</DialogDescription>

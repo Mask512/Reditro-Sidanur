@@ -18,11 +18,11 @@ export const MasterDataHome = () => (
       </BreadcrumbList>
     </Breadcrumb>
 
-    <div className="grid grid-cols-3 gap-4 max-w-xl">
+    <div className="grid px-4 md:grid-cols-3 md:p-0 gap-4 max-w-xl">
       {masterMenus.map((menu) => {
         return (
           <Link key={menu.link} to={`/master-data/${menu.link}`}>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full h-24 text-lg">
               {menu.name}
             </Button>
           </Link>

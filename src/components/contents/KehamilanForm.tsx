@@ -128,6 +128,16 @@ export const KehamilanForm = () => {
     return `${estimatedWeeks} minggu ${estimatedDays} hari`;
   };
 
+  const generateDianosis = () => {
+    const gValue = form.getValues('riwayatKehamilanGPA1');
+    const pValue = form.getValues('riwayatKehamilanGPA2');
+    const aValue = form.getValues('riwayatKehamilanGPA3');
+
+    if (gValue && pValue && aValue) {
+      return `G${gValue}P${aValue}A${aValue}`;
+    }
+  };
+
   const handleCalculate = () => {
     const hpht = form.getValues('riwayatKehamilanHPHT');
     if (hpht) {
@@ -140,6 +150,7 @@ export const KehamilanForm = () => {
 
       const estimatedAge = calculateEstimatedAge(hpht);
       form.setValue('pemeriksaanUsiaKehamilan', estimatedAge);
+      form.setValue('diagnosa', `${generateDianosis()} ${estimatedAge}`);
     }
   };
 

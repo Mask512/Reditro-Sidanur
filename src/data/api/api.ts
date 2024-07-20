@@ -1,15 +1,10 @@
 import { APP } from '@/data/app';
 import axios from 'axios';
 import { clearAuth } from '../../utils/authenticate';
-import {
-  AccountType,
-  JenisKBType,
-  LokasiPraktekType,
-} from '@/schema/schema';
+import { AccountType, JenisKBType, LokasiPraktekType } from '@/schema/schema';
 import { Pasien } from '@/data/api/pasien';
 
 const apiBaseUrl = APP.API_URL;
-
 
 // Account
 
@@ -42,6 +37,11 @@ export const deleteUser = async (login: string) => {
 export const toggleActiveUser = async (user: AccountType) => {
   user.activated = !user.activated;
   await axios.put(`${apiBaseUrl}/admin/users`, user);
+};
+
+export const updateUser = async (user: AccountType) => {
+  const response = await axios.put(`${apiBaseUrl}/admin/users`, user);
+  return response;
 };
 
 // pekerjaan
@@ -148,7 +148,7 @@ export const deleteJenisKB = async (id: string) => {
   await axios.delete(`${apiBaseUrl}/jenis-kbs/${id}`);
 };
 
-// bidan 
+// bidan
 
 export const getBidans = async () => {
   const { data } = await axios.get(`${apiBaseUrl}/bidans`);
@@ -221,7 +221,7 @@ export const getTotalNifas = async () => {
   }
 };
 
-// pemeriksaan kehamilan 
+// pemeriksaan kehamilan
 
 export const getRiwayatKehamilan = async () => {
   const { data } = await axios.get(`${apiBaseUrl}/pemeriksaan-kehamilans`);
@@ -230,7 +230,9 @@ export const getRiwayatKehamilan = async () => {
   }
 };
 export const getTotalKehamilans = async () => {
-  const { data } = await axios.get(`${apiBaseUrl}/pemeriksaan-kehamilans/count`);
+  const { data } = await axios.get(
+    `${apiBaseUrl}/pemeriksaan-kehamilans/count`,
+  );
   if (data) {
     return data;
   }
@@ -241,8 +243,6 @@ export const getTotalKehamilans = async () => {
 export const getRiwayatPersalinan = async () => {
   const { data } = await axios.get(`${apiBaseUrl}/persalinans`);
   if (data) {
-    console.log(data);
-    
     return data;
   }
 };

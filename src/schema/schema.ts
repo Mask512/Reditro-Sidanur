@@ -31,7 +31,7 @@ export const authoritySchema = z.union([
 ]);
 
 export const accountTypeSchema = z.object({
-  id: z.string().optional(),
+  id: z.any().optional(),
   login: z.string(),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
@@ -39,9 +39,9 @@ export const accountTypeSchema = z.object({
   activated: z.boolean().optional(),
   langKey: z.string().optional(),
   createdBy: z.string().optional(),
-  createdDate: z.date().optional().nullable(),
+  createdDate: z.string().datetime().optional().nullable(),
   lastModifiedBy: z.string().optional(),
-  lastModifiedDate: z.date().optional().nullable(),
+  lastModifiedDate: z.string().datetime().optional().nullable(),
   password: z.string().optional(),
   authorities: z.array(authoritySchema),
 });
